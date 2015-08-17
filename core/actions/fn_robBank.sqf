@@ -11,7 +11,7 @@ _shop = [_this,0,ObjNull,[ObjNull]] call BIS_fnc_param; //The object that has th
 _robber = [_this,1,ObjNull,[ObjNull]] call BIS_fnc_param; //Can you guess? Alright, it's the player, or the "caller". The object is 0, the person activating the object is 1
 _action = [_this,2] call BIS_fnc_param;//Action name
 _pos = GetPos _shop;
-if(playersNumber west < 5) exitWith { hint "Não há 5 policias online para roubar este banco!"};
+if(playersNumber west < 0) exitWith { hint "Não há 5 policias online para roubar este banco!"};
 if(side _robber != civilian) exitWith { hint "Você não pode roubar este banco!" };
 if (vehicle player != _robber) exitWith { hint "Você precisa sair do veículo!" };
 if !(alive _robber) exitWith {};
@@ -25,11 +25,11 @@ _shop setVariable ["rip",true,true];
 _kassa = 600000 + round(random 100000);
 _shop switchMove "AmovPercMstpSsurWnonDnon";
 _chance = random(100);
-if(_chance >= 40) then { hint "O Gerente do Banco do Brasil acionou o alarme silencioso, a polícia foi avisada!"; [[1,format["ALARME!!! - O Banco Br.Team: %1 está sendo roubado!", _shop]],"life_fnc_broadcast",west,false] spawn life_fnc_MP; };
+if(_chance >= 40) then { hint "O Gerente do Banco Br.Team acionou o alarme silencioso, a polícia foi avisada!"; [[1,format["ALARME!!! - O Banco Br.Team: %1 está sendo roubado!", _shop]],"life_fnc_broadcast",west,false] spawn life_fnc_MP; };
 [[1,format["%1 está roubando um posto de gasolina!", profileName]],"life_fnc_broadcast",true,false] spawn BIS_fnc_MP;
 _marker = createMarker [format["Marker%1",_shop], _pos];
 _marker setMarkerColor "ColorRed";
-_marker setMarkerText "ATENÇÃO - O Banco do Brasil está sendo roubado!!!";
+_marker setMarkerText "ATENÇÃO - O Banco Br.Team está sendo roubado!!!";
 _marker setMarkerType "mil_warning";
 
 [[getPlayerUID _robber,name _robber,"212B"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
@@ -58,9 +58,9 @@ while{true} do
 	playSound3D ["A3\Sounds_F\sfx\alarm_blufor.wss", player]; //loop that shit
 };
 
-if(!(alive _robber)) exitWith 
+if(!(alive _robber)) exitWith
 {
-	deletemarker _marker; 
+	deletemarker _marker;
 	[_shop] spawn
 	{
 		private["_shop"];
@@ -71,11 +71,11 @@ if(!(alive _robber)) exitWith
 	};
 	_shop setVariable ["rip",false,true];
 };
-if(_robber distance _shop > 11) exitWith 
-{ 
-	_shop switchMove ""; 
-	hint "Você precisa estar no raio de 10 metros de distância para roubar o Banco! - A caixa eletrônico está fechado!"; 
-	5 cutText ["","PLAIN"]; 
+if(_robber distance _shop > 11) exitWith
+{
+	_shop switchMove "";
+	hint "Você precisa estar no raio de 10 metros de distância para roubar o Banco! - A caixa eletrônico está fechado!";
+	5 cutText ["","PLAIN"];
 	deletemarker _marker;
     _ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];
 	//[["sounds\pol_gas_fail"],"life_fnc_clientSound",west,false] spawn BIS_fnc_MP;
@@ -91,9 +91,9 @@ if(_robber distance _shop > 11) exitWith
 };
 if(life_isTazed) exitWith
 {
-	_shop switchMove ""; 
-	hint "Você foi eletrocutado, e o roubo falhou!"; 
-	5 cutText ["","PLAIN"]; 
+	_shop switchMove "";
+	hint "Você foi eletrocutado, e o roubo falhou!";
+	5 cutText ["","PLAIN"];
 	deletemarker _marker;
     _ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];
 	[_shop] spawn
@@ -117,7 +117,7 @@ deletemarker _marker;
 life_use_atm = false;
 sleep (120 + random(180));
 life_use_atm = true;
-[[1,format["NEWS: O Banco do Brasil acaba de ser roubado, os ladrôes fugiram com: $%1", [_kassa] call life_fnc_numberText]],"life_fnc_broadcast",civilian,false] spawn life_fnc_MP;
+[[1,format["NEWS: O Banco Br.Team acaba de ser roubado, os ladrôes fugiram com: $%1", [_kassa] call life_fnc_numberText]],"life_fnc_broadcast",civilian,false] spawn life_fnc_MP;
 
 [_shop] spawn
 {

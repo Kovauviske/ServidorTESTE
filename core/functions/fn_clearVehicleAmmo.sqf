@@ -1,97 +1,43 @@
+#include <macro.h>
 /*
-
-    File: fn_clearVehicleAmmo.sqf
-	Autor: TheTotenkopf™
-
-	Description: Entfernt alle Waffen/Flaires und Repairiert sie noch einmal falls beim Spawnen etwas zerstört wurde.
-
+	File: fn_clearVehicleAmmo.sqf
+	Author: Bryan "Tonic" Boardwine
+	
+	Description:
+	Clears the vehicle of ammo types that we don't want.
 */
-private["_veh","_classname","_vehicle"];
-
-_veh = _this select 0;
+private["_vehicle","_veh"];
 _vehicle = [_this,0,Objnull,[Objnull]] call BIS_fnc_param;
-_classname = typeOf _veh;
+if(isNull _vehicle) exitWith {}; //DAFUQ
+_veh = typeOf _vehicle;
 
-switch (_classname) do
-{
-	//Jet A-10
-	case "O_Plane_CAS_02_F":
-	{
-		//Remove ammo and Flaires
-		_veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-        systemChat "Armas de distância e Reparos";
-    };
+if(EQUAL(_veh,"B_Boat_Armed_01_minigun_F")) then {
+_vehicle removeMagazinesTurret ["200Rnd_40mm_G_belt",[0]];
+};
 
-	//GhostHawk (Black)
-    case "B_Heli_Transport_01_F":
-    {
-        //Remove ammo and Flaires
-		_veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-        systemChat "Armas de distância e Reparos";
-    };
+if(EQUAL(_veh,"B_APC_Wheeled_01_cannon_F")) then  {
+	_vehicle removeMagazinesTurret ["60Rnd_40mm_GPR_Tracer_Red_shells",[0]];
+	_vehicle removeMagazinesTurret ["40Rnd_40mm_APFSDS_Tracer_Red_shells",[0]];
+};
 
-	//GhostHawk (Camo)
-	case "B_Heli_Transport_01_camo_F":
-    {
-        //Remove ammo and Flaires
-        _veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-        systemChat "Armas de distância e Reparos";
-    };
+if(EQUAL(_veh,"O_Heli_Attack_02_black_F")) then {
+	_vehicle removeMagazinesTurret ["250Rnd_30mm_APDS_shells",[0]];
+	_vehicle removeMagazinesTurret ["8Rnd_LG_scalpel",[0]];
+	_vehicle removeMagazinesTurret ["38Rnd_80mm_rockets",[0]];	
+};
 
-	//Hellcat (Unarmed)
-	case "I_Heli_light_03_unarmed_F":
-    {
-        //Remove ammo and Flaires
-        _veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-        systemChat "Armas de distância e Reparos";
-    };
+if(EQUAL(_veh,"O_Heli_Light_02_F")) then {
+	_vehicle removeMagazinesTurret ["12Rnd_PG_missiles",[-1]];
+};
 
-	//Ifrit
-	case "O_MRAP_02_F":
-    {
-        //Remove ammo and Flaires
-        _veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-        systemChat "Armas de distância e Reparos";
-    };
+if(EQUAL(_veh,"B_Heli_Attack_01_F")) then {
+	_vehicle removeMagazinesTurret ["24Rnd_PG_missiles",[-1]];
+    _vehicle removeMagazinesTurret ["4Rnd_AAA_missiles",[-1]];
+};
 
-	//Mohawk
-	case "I_Heli_Transport_02_F":
-    {
-        //Remove ammo and Flaires
-        _veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-        systemChat "Armas de distância e Reparos";
-    };
-
-	//MiniGun Boat
-	case "B_Boat_Armed_01_minigun_F":
-	{
-		//Remove ammo and Flaires
-		_veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-	};
-
-	//Strider
-	case "I_MRAP_03_F":
-	{
-		//Remove ammo and Flaires
-		_veh setVehicleAmmo 0;
-		_veh setDamage 0;
-		_veh allowDamage true;
-		systemChat "Armas de distância e Reparos";
-	};
+if(EQUAL(_veh,"B_APC_Wheeled_01_cannon_F")) then {
+	_vehicle removeMagazinesTurret ["60Rnd_40mm_GPR_Tracer_Red_shells",[-1]];
+    _vehicle removeMagazinesTurret ["40Rnd_40mm_APFSDS_Tracer_Red_shells",[-1]];
 };
 
 clearWeaponCargoGlobal _vehicle;

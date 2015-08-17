@@ -1,51 +1,15 @@
-enableSaving [false, false];
-
-X_Server = false;
-X_Client = false;
-X_JIP = false;
 StartProgress = false;
-
-if(!isDedicated) then { X_Client = true;};
 enableSaving[false,false];
 
-//Exec Scripts and more...
-life_versionInfo = "Altis Life RPG";
+life_versionInfo = "Altis Life RPG v4.0";
 [] execVM "briefing.sqf"; //Load Briefing
-[] execVM "KRON_Strings.sqf"; //Load the Server Strings
-[] execVM "script\fastrope.sqf"; //Load Fastrope
-[] execVM "script\welcome.sqf"; //Load Welcome Intro
-[] execVM "core\civilian\fn_welcome.sqf"; //Load Willkommen
-[] execVM "script\teargas.sqf"; //Load Teargas Script for Cops
-[] execVM "script\savezone.sqf"; //Load the Savezones
-[] execVM "script\fn_statusBar.sqf"; //Load the Statusbar
-enableEnvironment true;
+[] execVM "KRON_Strings.sqf";
+[] execVM "scripts\safeZone.sqf";
+[] execVM "scripts\statusBar.sqf";
+[] execVM "zlt_fastrope.sqf";
+[] execVM "effects.sqf";
+_igiload = execVM "scripts\IgiLoad\IgiLoadInit.sqf";
+setTerrainGrid 50;
 
-//Scheiß Nebel hau ab
-[] spawn {
-	while{true} do {
-		sleep 10;
-		200 setFog 0;
-		sleep 590;
-	};
-};
-//Scheiß Regen hau ab
-[] spawn {
-	while{true} do {
-		sleep 10;
-		200 setRain 0;
-		sleep 590;
-	};
-};
-//Performance
-setTerrainGrid 45;
-setViewDistance 1000;
-setObjectViewDistance [800,50];
+StartProgress = true;
 
-MAC_fnc_switchMove = {
-    private["_object","_anim"];
-    _object = _this select 0;
-    _anim = _this select 1;
-
-    _object switchMove _anim;
-
-};

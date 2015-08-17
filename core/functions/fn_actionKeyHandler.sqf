@@ -50,14 +50,20 @@ if(_curTarget isKindOf "Man" && {!alive _curTarget} && {playerSide in [west,inde
 	};
 };
 
-
 //If target is a player then check if we can use the cop menu.
-if(isPlayer _curTarget && _curTarget isKindOf "Man") then {
-	if((_curTarget getVariable["restrained",false]) && !dialog && playerSide == west) then {
+if(isPlayer _curTarget && _curTarget isKindOf "Man") then 
+{
+	if((_curTarget getVariable["restrained",false]) && {!(player getVariable["restrained",false])} && !dialog && playerSide == west) then 
+	{
 		[_curTarget] call life_fnc_copInteractionMenu;
 	};
-	if((_curTarget getVariable["restrained",false]) && !dialog && playerSide == civilian) then {
-		[_curTarget] call life_fnc_civInteractionMenu;
+	if((_curTarget getVariable["restrained",false]) && {!(player getVariable["restrained",false])} && !dialog && playerSide == civilian) exitWith
+	{
+	    [_curTarget] call life_fnc_civInteractionMenu;
+	};
+		if((_curTarget getVariable["restrained",false]) && {!(player getVariable["restrained",false])} && !dialog && playerSide == east) exitWith
+	{
+	    [_curTarget] call life_fnc_adacInteractionMenu;
 	};
 } else {
 	//OK, it wasn't a player so what is it?
@@ -70,7 +76,16 @@ if(isPlayer _curTarget && _curTarget isKindOf "Man") then {
 	//It's a vehicle! open the vehicle interaction key!
 	if(_isVehicle) then {
 		if(!dialog) then {
-			if(player distance _curTarget < ((boundingBox _curTarget select 1) select 0) + 2) then {
+			if(playerSide == west && player distance _curTarget < (((boundingBox _curTarget select 1) select 0) + 2)) then {
+				[_curTarget] call life_fnc_vInteractionMenu;
+			};
+			if(playerSide == civilian && player distance _curTarget < (((boundingBox _curTarget select 1) select 0) + 2)) then {
+			    [_curTarget] call life_fnc_civVInteractionMenu;
+			};
+			if(playerSide == independent && player distance _curTarget < (((boundingBox _curTarget select 1) select 0) + 2)) then {
+			    [_curTarget] call life_fnc_medVInteractionMenu;
+			};
+			if(playerSide == east && player distance _curTarget < (((boundingBox _curTarget select 1) select 0) + 2)) then {
 				[_curTarget] call life_fnc_vInteractionMenu;
 			};
 		};
@@ -87,21 +102,15 @@ if(isPlayer _curTarget && _curTarget isKindOf "Man") then {
 				waitUntil {scriptDone _handle};
 			};
 		} else {
-			//OK, it wasn't a vehicle so let's see what else it could be?
+	//OK, it wasn't a vehicle so let's see what else it could be?
 			if((typeOf _curTarget) in _miscItems) then {
-				//OK, it was a misc item (food,water,etc).
-				private["_handle"];
-				_handle = [_curTarget] spawn life_fnc_pickupItem;
-				waitUntil {scriptDone _handle};
+				[[_curTarget,player,false],"TON_fnc_pickupAction",false,false,true] call life_fnc_MP;
 			} else {
 				//It wasn't a misc item so is it money?
-				if((typeOf _curTarget) == _money && {!(_curTarget getVariable["inUse",false])}) then {
-					private["_handle"];
-					_curTarget setVariable["inUse",TRUE,TRUE];
-					_handle = [_curTarget] spawn life_fnc_pickupMoney;
-					waitUntil {scriptDone _handle};
+				if(EQUAL((typeOf _curTarget),_money) && {!(_curTarget GVAR ["inUse",false])}) then {
+					[[_curTarget,player,true],"TON_fnc_pickupAction",false,false,true] call life_fnc_MP;
 				};
 			};
 		};
 	};
-};
+}; 

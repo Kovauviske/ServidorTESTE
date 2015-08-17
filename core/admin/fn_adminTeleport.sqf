@@ -2,20 +2,16 @@
 /*
 	File: fn_adminTeleport.sqf
 	Author: ColinM9991
-	Credits: To original script author(s) & Ciaran from AL Forums
+	Credits: To original script author(s)
 	Description:
 	Teleport to chosen position.
 */
-if((call life_adminlevel) < 2) exitWith {hint "Du bist noch kein Staff..."};
-
-//Add Map
-player addItem "ItemMap";
-player assignItem "ItemMap";
+if(FETCH_CONST(life_adminlevel) == 0) exitWith {closeDialog 0;};
 
 [] spawn {
   while {dialog} do {
    closeDialog 0;
-   sleep 0.05;
+   sleep 0.01;
   };
 };
 

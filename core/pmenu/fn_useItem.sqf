@@ -1,206 +1,87 @@
+#include <macro.h>
 /*
 	File: fn_useItem.sqf
 	Author: Bryan "Tonic" Boardwine
-
+	
 	Description:
 	Main function for item effects and functionality through the player menu.
 */
-private["_item"];
+private "_item";
 disableSerialization;
-if((lbCurSel 2005) == -1) exitWith {hint "Você precisa selecionar um item primeiro!";};
-_item = lbData[2005,(lbCurSel 2005)];
+if(EQUAL(lbCurSel 2005,-1)) exitWith {hint localize "STR_ISTR_SelectItemFirst";};
+_item = CONTROL_DATA(2005);
 
-switch (true) do
-{
-	case (_item == "water" or _item == "coffee"):
-	{
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
+switch (true) do {
+	case (_item in ["waterBottle","coffee","redgull"]): {
+		if(([false,_item,1] call life_fnc_handleInv)) then {
 			life_thirst = 100;
-			player setFatigue 0;
+			if(EQUAL(LIFE_SETTINGS(getNumber,"enable_fatigue"),1)) then {player setFatigue 0;};
+			if(EQUAL(_item,"redgull") && {EQUAL(LIFE_SETTINGS(getNumber,"enable_fatigue"),1)}) then {
+				[] spawn {
+					life_redgull_effect = time;
+					titleText[localize "STR_ISTR_RedGullEffect","PLAIN"];
+					player enableFatigue false;
+					waitUntil {!alive player OR ((time - life_redgull_effect) > (3 * 60))};
+					player enableFatigue true;
+				};
+			};
 		};
 	};
-
-	case (_item == "boltcutter"): {
+	
+	case (EQUAL(_item,"boltcutter")): {
 		[cursorTarget] spawn life_fnc_boltcutter;
 		closeDialog 0;
 	};
-
-	case (_item == "painkillers"):
-	{
-		if(vehicle player != player) exitWith {hint "Você não pode curar em um veículo ..."};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			player setDamage 0;
-			player setFatigue 0;
-			player allowDamage true;
-			player enableSimulation true;
-			closeDialog 0;
-			hint "Os analgésicos fez efeito! Você está com a vida cheia."
-		};
-	};
-
-	case (_item == "morphium"):
-	{
-		if(playerSide in [west,independent]) exitWith {hint "Você está em serviço!"};
-		if(vehicle player != player) exitWith {hint "Você não pode curar em um veículo ..."};
-		if(([false,_item,1]call life_fnc_handleInv)) then
-		{
-			player setFatigue 1;
-			player setDamage 0;
-			if(isNil "life_drink") then {life_drink = 0;};
-			life_drink = life_drink + 0.1;
-			life_thirst = life_thirst - 65;
-			life_hunger = life_hunger - 75;
-			if (life_drink < 0.08) exitWith {};
-			[] spawn life_fnc_drinkwhiskey;
-			closeDialog 0;
-		};
-	};
-
-	case (_item == "blastingcharge"): {
+	
+	case (EQUAL(_item,"blastingcharge")): {
 		player reveal fed_bank;
 		(group player) reveal fed_bank;
 		[cursorTarget] spawn life_fnc_blastingCharge;
 	};
-
-	case (_item == "defusekit"): {
+	
+	case (EQUAL(_item,"defusekit")): {
 		[cursorTarget] spawn life_fnc_defuseKit;
 	};
-
+	
 	case (_item in ["storagesmall","storagebig"]): {
 		[_item] call life_fnc_storageBox;
 	};
-
-	case (_item == "battery"):
-	{
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			life_battery = 100;
-			hint "Sua bateria está agora em 100%.";
-		};
-	};
-
-	case (_item == "redgull"):
-	{
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			life_thirst = 100;
-			player setFatigue 0;
-			[] spawn
-			{
-				life_redgull_effect = time;
-				titleText["Redbull lhe deu asas e agora têm por 5 minutos mais resistência.","PLAIN"];
-				player enableFatigue false;
-				waitUntil {!alive player OR ((time - life_redgull_effect) > (5 * 60))};
-				player enableFatigue true;
-			};
-		};
-	};
-
-	case (_item == "spikeStrip"):
-	{
-		if(!isNull life_spikestrip) exitWith {hint "Você já tem o Spikestrip na mão."};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
+	
+	case (EQUAL(_item,"spikeStrip")): {
+		if(!isNull life_spikestrip) exitWith {hint localize "STR_ISTR_SpikesDeployment"};
+		if(([false,_item,1] call life_fnc_handleInv)) then {
 			[] spawn life_fnc_spikeStrip;
 		};
 	};
-
-	case (_item == "mauer"):
-	{
-		if(!isNull life_mauer) exitWith {hint "Você ja colocou uma barreira!"};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			[] spawn life_fnc_mauer;
-		};
-	};
-
-	case (_item == "fuelF"):
-	{
-		if(vehicle player != player) exitWith {hint "Você está navegando em um veículo"};
+	
+	case (EQUAL(_item,"fuelFull")): {
+		if(vehicle player != player) exitWith {hint localize "STR_ISTR_RefuelInVehicle"};
 		[] spawn life_fnc_jerryRefuel;
 	};
-
-	case (_item == "lockpick"):
-	{
+	
+	case (EQUAL(_item,"lockpick")): {
 		[] spawn life_fnc_lockpick;
 	};
-
-	case (_item in ["apple","rabbit","salema","ornate","mackerel","tuna","mullet","catshark","turtle","turtlesoup","donuts","tbacon","peach"]):
-	{
-		[_item] call life_fnc_eatFood;
+	
+	case (EQUAL(_item,"handcuffs")): {
+		[] spawn life_fnc_handcuffs;
+	};
+	
+	case (EQUAL(_item,"handcuffkeys")): {
+		[] spawn life_fnc_handcuffkeys;
 	};
 
-	case (_item == "pickaxe"):
-	{
-		[] spawn life_fnc_pickAxeUse;
-	};
-
-	case (_item =="bottledwhiskey"):
-	{
-		if(playerSide in [west,independent]) exitWith {hint localize "STR_MISC_WestIndNoNo";};
-		if((player getVariable ["inDrink",FALSE])) exitWith {hint localize "STR_MISC_AlreadyDrinking";};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			if(isNil "life_drink") then {life_drink = 0;};
-			life_drink = life_drink + 0.06;
-			if (life_drink < 0.07) exitWith {};
-			[] spawn life_fnc_drinkwhiskey;
-		};
-	};
-
-	case (_item =="bottledshine"):
-	{
-		if(playerSide in [west,independent]) exitWith {hint localize "STR_MISC_WestIndNoNo";};
-		if((player getVariable ["inDrink",FALSE])) exitWith {hint localize "STR_MISC_AlreadyDrinking";};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			if(isNil "life_drink") then {life_drink = 0;};
-			life_drink = life_drink + 0.08;
-			if (life_drink < 0.09) exitWith {};
-			[] spawn life_fnc_drinkmoonshine;
-		};
-	};
-
-	case (_item =="bottledbeer"):
-	{
-
-		if(playerSide in [west,independent]) exitWith {hint localize "STR_MISC_WestIndNoNo";};
-		if((player getVariable ["inDrink",FALSE])) exitWith {hint localize "STR_MISC_AlreadyDrinking";};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			if(isNil "life_drink") then {life_drink = 0;};
-			life_drink = life_drink + 0.02;
-			if (life_drink < 0.06) exitWith {};
-			[] spawn life_fnc_drinkbeer;
-		};
-	};
-
-	case (_item == "methp"):
-	{
-		if(playerSide in [west,independent]) exitWith {hint "Nada de droga no serviço!"};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			[] spawn life_fnc_useMarihuana;
-		};
-	};
-
-	case (_item == "heroinp"):
-	{
-		if(playerSide in [west,independent]) exitWith {hint "Nada de droga no serviço!"};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			[] spawn life_fnc_useHeroin;
-		};
-	};
-
-	case (_item == "cocainep"):
-	{
-		if(playerSide in [west,independent]) exitWith {hint "Nada de droga no serviço!"};
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			[] spawn life_fnc_useKokain;
+	case (_item in ["apple","rabbitgrilled","salemaraw","ornateraw","mackerelraw","tunaraw","mulletraw","catsharkraw","turtle","turtlesoup","donuts","tbacon","peach"]): {
+		if(!(EQUAL(M_CONFIG(getNumber,"VirtualItems",_item,"edible"),-1))) then {
+			if([false,_item,1] call life_fnc_handleInv) then {
+				_val = M_CONFIG(getNumber,"VirtualItems",_item,"edible");
+				_sum = life_hunger + _val;
+				switch (true) do {
+					case (_val < 0 && _sum < 1): {life_hunger = 5;}; //This adds the ability to set the entry edible to a negative value and decrease the hunger without death
+					case (_sum > 100): {life_hunger = 100;};
+					default {life_hunger = _sum;};
+				};
+			};
 		};
 	};
 
@@ -214,20 +95,50 @@ switch (true) do
 			player setFatigue .5;
 		};
 	};
-
-	case (_item == "marijuana"):
-	{
+	
+	case (EQUAL(_item,"pickaxe")): {
+		[] spawn life_fnc_pickAxeUse;
+	};
+	
+		case (EQUAL(_item,"heroin_processed")): {
 		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			[] spawn life_fnc_weed;
+		{			
+			[] spawn life_fnc_useHeroin;
 		};
 	};
-
-	default
-	{
-		hint "Você não pode usar esse item.";
+	
+			case (EQUAL(_item,"meth_processed")): {
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{			
+			[] spawn life_fnc_useMeth;
+		};
+	};
+	
+	case (EQUAL(_item,"marijuana")): {
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{
+			[] spawn life_fnc_useMarijuana;
+		};
+	};
+	
+	case (EQUAL(_item,"cocaine_processed")): {
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{			
+			[] spawn life_fnc_useCocaine;
+		};
+	};
+	
+	case (EQUAL(_item,"cannabis")): {
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{			
+			[] spawn life_fnc_useWeed;
+		};
+	};
+	
+	default {
+		hint localize "STR_ISTR_NotUsable";
 	};
 };
-
+	
 [] call life_fnc_p_updateMenu;
 [] call life_fnc_hudUpdate;

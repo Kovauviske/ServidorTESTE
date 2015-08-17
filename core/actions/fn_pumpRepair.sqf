@@ -1,13 +1,14 @@
+#include <macro.h>
 /*
 	File: fn_pumpRepair.sqf
-
+	
 	Description:
 	Quick simple action that is only temp.
 */
 private["_method"];
-if(life_cash < 500) then
+if(CASH < 500) then
 {
-	if(life_atmcash < 500) exitWith {_method = 0;};
+	if(BANK < 500) exitWith {_method = 0;};
 	_method = 2;
 }
 	else
@@ -17,7 +18,7 @@ if(life_cash < 500) then
 
 switch (_method) do
 {
-	case 0: {hint "Você não tem 500 R$ na sua carteiro nem no banco."};
-	case 1: {vehicle player setDamage 0; life_cash = life_cash - 500; hint "Você reparou seu veiculo por 500 R$";};
-	case 2: {vehicle player setDamage 0; life_atmcash = life_atmcash - 500; hint "Você pintou seu veiculo por 500 R$";};
+	case 0: {hint "Você não tem $500 em dinheiro na sua conta bancária."};
+	case 1: {vehicle player setDamage 0; SUB(CASH,500); hint "Você reparou o veículo por $500";};
+	case 2: {vehicle player setDamage 0; SUB(BANK,500); hint "Você reparou o veículo por $500";};
 };

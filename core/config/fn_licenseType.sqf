@@ -24,8 +24,9 @@ switch (_mode) do
 			case "oil": {_var = "license_civ_oil"}; //Oil processing license cost
 			case "cair": {_var = "license_cop_air"}; //Cop Pilot License cost
 			case "swat": {_var = "license_cop_swat"}; //Swat License cost
-			case "cg": {_var = "license_cop_cg"}; //Coast guard license cost
+			case "coastguard": {_var = "license_cop_coastguard"}; //Coast guard license cost
 			case "heroin": {_var = "license_civ_heroin"}; //Heroin processing license cost
+			case "meth": {_var = "license_civ_meth"}; //Meth processing license cost
 			case "marijuana": {_var = "license_civ_marijuana"}; //Marijuana processing license cost
 			case "medmarijuana": {_var = "license_civ_medmarijuana"}; //Medical Marijuana processing license cost
 			case "gang": {_var = "license_civ_gang"}; //Gang license cost
@@ -38,32 +39,18 @@ switch (_mode) do
 			case "iron": {_var = "license_civ_iron"};
 			case "copper": {_var = "license_civ_copper"};
 			case "cement": {_var = "license_civ_cement"};
-			case "grapes": {_var = "license_civ_grapes"};
-			case "meth": {_var = "license_civ_meth"};
-			case "medic": {_var = "license_med_air"};
+			case "cana": {_var = "license_civ_cana"};
+			case "gas": {_var = "license_civ_gas"};
+			case "mair": {_var = "license_med_air"};
 			case "home": {_var = "license_civ_home"};
-			case "adac": {_var = "license_med_adac"};
-			case "liquor": {_var = "license_civ_liquor"};
-			case "beer": {_var = "license_civ_liquor"};
-			case "stiller": {_var = "license_civ_stiller"};
-			case "whiskey": {_var = "license_civ_stiller"};
-			case "moonshine": {_var = "license_civ_stiller"};
-			case "mash": {_var = "license_civ_stiller"};
-			case "bottledshine": {_var = "license_civ_bottler"};
-			case "bottledbeer": {_var = "license_civ_bottler"};
-			case "bottledwhiskey": {_var = "license_civ_bottler"};
-			case "bottler": {_var = "license_civ_bottler"};
-			case "glassbottle": {_var = "license_civ_bottler"};
-			case "uranium": {_var = "license_civ_uranium"};
-			case "uranium1": {_var = "license_civ_uranium"};
-			case "uranium2": {_var = "license_civ_uranium"};
-			case "uranium2b": {_var = "license_civ_uranium"};
-			case "uranium3": {_var = "license_civ_uranium"};
-			case "uranium4": {_var = "license_civ_uranium"};
+			case "donator": {_var = "license_civ_donator"};
+			case "bcar": {_var = "license_adac_car"}; //BrasForte Air License 	
+			case "bair": {_var = "license_adac_air"}; //BrasForte Car License
+			case "brothers_of_war": {_var = "license_civ_brothers_of_war"}; 
 			default {_var = ""};
 		};
-	};
-	
+	};f
+			
 	case 1:
 	{
 		switch (_type) do
@@ -78,6 +65,7 @@ switch (_mode) do
 			case "license_cop_swat": {_var = "swat"}; //Swat License cost
 			case "license_cop_cg": {_var = "cg"}; //Coast guard license cost
 			case "license_civ_heroin": {_var = "heroin"}; //Heroin processing license cost
+			case "license_civ_meth": {_var = "meth"}; //Meth processing license cost
 			case "license_civ_marijuana": {_var = "marijuana"}; //Marijuana processing license cost
 			case "license_civ_medmarijuana": {_var = "medmarijuana"}; //Medical Marijuana processing license cost
 			case "license_civ_gang": {_var = "gang"}; //Gang license cost
@@ -90,22 +78,14 @@ switch (_mode) do
 			case "license_civ_iron": {_var = "iron"};
 			case "license_civ_copper": {_var = "copper"};
 			case "license_civ_cement": {_var = "cement"};
-			case "license_civ_grapes": {_var = "grapes"};
-			case "license_civ_meth": {_var = "meth"};
-			case "license_med_air": {_var = "medic"};
+			case "license_civ_cana": {_var = "cana"};
+			case "license_civ_gas": {_var = "gas"};
+			case "license_med_air": {_var = "mair"};
 			case "license_civ_home": {_var = "home"};
-			case "license_med_adac": {_var = "adac"};
-			case "license_civ_bottler": {_var = "glassbottle"};
-			case "license_civ_bottler": {_var = "bottler"};
-			case "license_civ_bottler": {_var = "bottledwhiskey"};
-			case "license_civ_bottler": {_var = "bottledbeer"};
-			case "license_civ_bottler": {_var = "bottledshine"};
-			case "license_civ_stiller": {_var = "mash"};
-			case "license_civ_stiller": {_var = "moonshine"};
-			case "license_civ_stiller": {_var = "whiskey"};
-			case "license_civ_stiller": {_var = "stiller"};
-			case "license_civ_stiller": {_var = "liquor"};
-			case "license_civ_stiller": {_var = "beer"};
+			case "license_civ_donator": {_var = "donator"};
+			case "license_adac_car": {_var = "bcar"};
+			case "license_adac_air": {_var = "bair"};
+			case "license_civ_brothers_of_war": {_var = "brothers_of_war"};			
 			default {_var = ""};
 		};
 	};

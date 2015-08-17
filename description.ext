@@ -1,20 +1,22 @@
-author = "Tonic | Editado por Seadrop, Kovauviske e AbsolutZ";
-onLoadName = "+BRASIL +ALTIS LIFE +NEW 5.0 +SAVE +24/7 +ADMIN ON +BR +DANTAS";
-onLoadMission = "DANTAS Altis Life RPG NEW* 5.0 l ts3: dantashost.ts3dns.com";
+#include "infiSTAR_AdminMenu.hpp"
+
+author = "Tonic";
+onLoadName = "BRASIL Altis Life RPG BR DANTAS";
+onLoadMission = "Altis Life RPG 4.0 - DANTAS Server l TeamSpeak3- dantashost.ts3dns.com";
 joinUnassigned = 1;
 respawn = BASE;
-respawndelay = 1;
+respawndelay = 0.5;
 disabledAI = true;
-disableChannels[]= {0,1,2};
+disableChannels[]={0,1,2};
 enableDebugConsole = 1;
 respawnDialog = 0;
-loadScreen = "logo.jpg";
+loadScreen = "textures\server.jpg";
 
 class Header
 {
 	gameType = RPG;
 	minPlayers = 1;
-	maxPlayers = 115;
+	maxPlayers = 100;
 };
 
 wreckLimit = 3;
@@ -24,7 +26,13 @@ corpseLimit = 150;
 corpseRemovalMinTime = 999;
 corpseRemovalMaxTime = 9999;
 
+//SpyGlass configuration
+SPY_Enable = true;
+
+#include "Config_Spyglass.hpp"
+
 #include "dialog\MasterHandler.h"
+#include "Config_Master.hpp"
 
 class RscTitles
 {
@@ -32,7 +40,6 @@ class RscTitles
 	#include "dialog\progress.hpp"
 	#include "dialog\hud_nameTags.h"
 	#include "dialog\statusBar.hpp"
-	#include "AS_AdminMenu\spectating.hpp"
 };
 
 class CfgFunctions
@@ -43,140 +50,111 @@ class CfgFunctions
 class CfgSounds
 {
 	sounds[] = {};
+	
+	class intro
+	{
+		name = "civintro";
+		sound[] = {"\sounds\intro.ogg", 1.0, 1};
+		titles[] = {};
+	};	
 	class SirenLong
 	{
 		name = "SirenLong";
-		sound[] = {"\sounds\Siren_Long.ogg", 1.2, 1};
+		sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
 		titles[] = {};
 	};
-
+	
+	class SireneResgate
+	{
+		name = "SireneResgate";
+		sound[] = {"\sounds\sirene_resgate.ogg", 1.0, 1};
+		titles[] = {};
+	};	
+	
 	class tazersound
 	{
 		name = "Tazersound";
 		sound[] = {"\sounds\tazer.ogg", 0.25, 1};
 		titles[] = {};
 	};
-
+	
 	class flashbang
 	{
 		name = "flashbang";
-		sound[] = {"\sounds\flashbang.ogg", 0.75, 1};
+		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
 		titles[] = {};
 	};
-
+	
+	class car_alarm
+	{
+		name = "car_alarm";
+		sound[] = {"\sounds\car_alarm.ogg", 1.0, 1};
+		titles[] = {};
+	};
+	
 	class car_lock
 	{
 		name = "car_lock";
-		sound[] = {"\sounds\car_lock.ogg", 1.0, 1};
+		sound[] = {"\sounds\lock.ogg", 1.0, 1};
 		titles[] = {};
 	};
-	class unlock
+ 
+	class car_unlock
 	{
-		name = "unlock";
+		name = "car_unlock";
 		sound[] = {"\sounds\unlock.ogg", 1.0, 1};
 		titles[] = {};
-	};
-	class cuff
+	};	
+	
+	class papuda
 	{
-		name = "cuff";
-		sound[] = {"\sounds\cuff.ogg", 0.95, 0.95};
+		name = "papuda";
+		sound[] = {"\sounds\prisao.ogg", db+0, 1.0};
 		titles[] = {};
 	};
-	class empwarn
-	{
-		name = "empwarn";
-		sound[] = {"\sounds\empwarn.ogg", 1.0, 1};
-		titles[] = {};
-	};
-	class empacsound
-	{
-		name = "empacsound";
-		sound[] = {"sounds\empac.ogg", db-5, 1};
-		titles[] = {};
-	};
-	class welcome
-	{
-		name = "welcome";
-		sound[] = {"sounds\welcome.ogg", 1.0, 1};
-		titles[] = {};
-	};
-	class knockout
-	{
-		name = "knockout";
-		sound[] = {"sounds\knockout.ogg", 1.0, 1};
-		titles[] = {};
-	};
-  	class MedicSirenLong
-	{
-		name = "MedicSirenLong";
-		sound[] = {"sounds\MedicSirenLong.ogg", 1.0, 1};
-		titles[] = {};
-	};
-	class speech
-	{
-		name = "speech";
-		sound[] = {"sounds\speech.ogg", 1.0, 1};
-		titles[] = {};
-	};
-	class spraycan
-	{
-		name = "spraycan";
-		sound[] = {"sounds\spraycan.ogg", db-20, 1};
-		titles[] = {};
-	};
-	class alert
-	{
-		name= "alert";
-		sound[] = {"sounds\alert.ogg", 1.0, 1};
-		titles[] = {};
-	};
-	class mari
-	{
-		name= "mari";
-		sound[] = {"sounds\mari.ogg", 1.0, 1};
-		titles[] = {};
-	};
-	class PhotoSound
-	{
-		name = "PhotoSound";
-		sound[] = {"\sounds\camera_shot.ogg",0.5011872,1.0};
-		titles[] = {};
-	};
-	class caralarm
-	{
-		name= "caralarm";
-		sound[] = {"sounds\caralarm.ogg", 1.0, 1};
-		titles[] = {};
-	};
+	
+	class handcuffs                                   
+    {                                                      
+        name = "handcuffs"; 
+        sound[] = {"\sounds\handcuffs.ogg", 0.25, 1}; 
+        titles[] = {}; 
+    }; 
+	class punch_break
+    {
+        name = "punch_break";
+        sound[] = {"\sounds\punch_break.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	
 };
 
 class CfgDebriefing
 {
 	class NotWhitelisted
 	{
-		title = "Missão Fracassada";
-		subtitle = "Você foi suspenso das suas funções";
-		description = "Você não tem permissão para usar esse slot porque você não tem as permissões apropriadas, tente outro slot.";
+		title = "A Missão Falhou";
+		subtitle = "Você não pode usar este slot";
+		description = "Você não pode usar esse slot porque você não tem as permissões adequadas, tente outro slot.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
 	};
-
+	
 	class Blacklisted
 	{
-		title = "Missão Fracassada";
-		subtitle = "Você está na lista negra da polícia";
-		description = "Você não tem permissão para ser um policial devido a ações anteriores e os admins ter removido-lo de ser um policial.";
+		title = "A Missão Falhou";
+		subtitle = "Você está na lista negra dos policiais";
+		description = "Você não tem permissão para ser um policial devido a ações anteriores e os admins o removeram.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
 	};
-
+	
 	class SpyGlass
 	{
-		title = "SpyGlass te viu";
+		title = "The SpyGlass sees you";
 		subTitle = "Você foi detectado pelo SpyGlass";
-		description = "Você foi detectado por engano e foi relatado para o servidor. Aproveite seu dia.";
+		description = "Você foi detectado usando cheater e isso foi relatado para os admins do servidor. Aproveite o seu dia.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
@@ -187,70 +165,79 @@ class CfgNotifications
 {
 	class MedicalRequestEmerg
 	{
-		title = "Chamar Samu";
+		title = "Pedido de Resgate";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
 		description = "%1";
 		duration = 5;
 		priority = 7;
 	};
-
+	
 	class DeliveryAssigned
 	{
-		title = "Trabalho de Entrega Aceito";
+		title = "Entrega Aceita";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
 		description = "%1";
 		duration = 10;
 		priority = 7;
 	};
-
+	
 	class DeliveryFailed
 	{
-		title = "Trabalho de Entrega Falhou";
+		title = "A Entrega Falhou";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
 		description = "%1";
 		duration = 7;
 		priority = 7;
 	};
-
+	
 	class DeliverySucceeded
 	{
-		title = "Trabalho de entrega concluido";
+		title = "Delivery Job Completed";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
 		description = "%1";
 		duration = 6;
 		priority = 6;
 	};
-
+	
+	class AdacMessage
+    {
+        title = "BrasForte";
+        iconPicture = "icons\messagenew.paa";
+        description = "%1";
+        duration = 10;
+        priority = 5;
+    };
+	
 	class TextMessage
 	{
-		title = "Nova mensagem de texto";
+		title = "Você Recebeu Uma Mensagem";
 		iconPicture = "icons\messagenew.paa";
 		description = "%1";
 		duration = 10;
 		priority = 6;
 	};
-
+	
 	class PoliceDispatch
 	{
-		title = "Chamar Policia";
+		title = "911 Dispatch Center";
 		iconPicture = "icons\messagepolice.paa";
 		description = "%1";
 		duration = 10;
 		priority = 6;
 	};
-
+	
 	class AdminDispatch
 	{
-		title = "ADM Central de Notícias";
+		title = "Admin Dispatch Center";
 		iconPicture = "icons\messageadmin.paa";
 		description = "%1";
 		duration = 10;
 		priority = 6;
 	};
-
+	
 	class AdminMessage
 	{
-		title = "Mensagem do Administrador";
+		title = "Mensagem do Admin";
 		iconPicture = "icons\messageadmin.paa";
 		description = "%1";
 		duration = 10;

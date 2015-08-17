@@ -16,71 +16,118 @@ if(life_blacklisted) exitWith
 	sleep 30;
 };
 
-if(!(str(player) in ["cop_1111"])) then {
-	if((__GETC__(life_coplevel) == 0) && (__GETC__(life_adminlevel) == 0)) then {
+if(!(str(player) in ["cop_99"])) then {
+//if(!(str(player) in ["cop_1","cop_2","cop_3","cop_4"])) then {
+	if((FETCH_CONST(life_coplevel) == 0) && (FETCH_CONST(life_adminlevel) == 0)) then {
 		["NotWhitelisted",false,true] call BIS_fnc_endMission;
 		sleep 35;
 	};
 };
 
 
-player setVariable["rank",(__GETC__(life_coplevel)),true];
+player setVariable["rank",(FETCH_CONST(life_coplevel)),true];
 [] call life_fnc_spawnMenu;
 waitUntil{!isNull (findDisplay 38500)}; //Wait for the spawn selection to be open.
 waitUntil{isNull (findDisplay 38500)}; //Wait for the spawn selection to be done.
 
-//Introcam
-[] spawn life_fnc_IntroCam;
+[] spawn
+{
+while {true} do
+	{
+		waitUntil {backpack player == "B_Carryall_khk"}; 
+		(backpackContainer player) setObjectTextureGlobal [0,"textures\mochilas\policia.paa"];
+		waitUntil {backpack player != "B_Carryall_khk"};
+	};
+};
 
-//Skins und Backpacks für Cops
-// CopLevel 1
+
 [] spawn
 {
 while {true} do
-    {
-        waitUntil {uniform player == "U_Rangemaster"};
-        player setObjectTextureGlobal [0,"skins\human\cop\rekrut.jpg"];
-        waitUntil {uniform player != "U_Rangemaster"};
-    };
-};
-// CopLevel 2
-[] spawn
-{
-while {true} do
-    {
-        waitUntil {uniform player == "U_B_CombatUniform_mcam_vest"};
-        player setObjectTextureGlobal [0,"skins\human\cop\polizei_uniform.jpg"];
-        waitUntil {uniform player != "U_B_CombatUniform_mcam_vest"};
-    };
-};
-// CopLevel 3+4
-[] spawn
-{
-while {true} do
-    {
-        waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
-        player setObjectTextureGlobal [0,"skins\human\cop\polizei2.jpg"];
-        waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+	{
+		waitUntil {vest player == "V_TacVest_blk_POLICE"}; 
+		(vestContainer player) setObjectTextureGlobal [0,"textures\uniformes\policia\colete.paa"];
+		waitUntil {vest player != "V_TacVest_blk_POLICE"};
 	};
 };
-// CopLevel 5
+
+//Recruta
 [] spawn
 {
 while {true} do
-    {
-        waitUntil {uniform player == "U_B_CombatUniform_mcam"};
-        player setObjectTextureGlobal [0,"skins\human\cop\sek.jpg"];
-        waitUntil {uniform player != "U_B_CombatUniform_mcam"};
-    };
+{
+waitUntil {uniform player == "U_Rangemaster"};
+player setObjectTextureGlobal [0,"textures\uniformes\policia\recruta.jpg"];
+waitUntil {uniform player != "U_Rangemaster"};
 };
-// CopLevel 6
+};
+
+//Soldado
 [] spawn
 {
 while {true} do
-    {
-        waitUntil {uniform player == "U_B_CombatUniform_mcam_worn"};
-        player setObjectTextureGlobal [0,"skins\human\cop\gsg9.paa"];
-        waitUntil {uniform player != "U_B_CombatUniform_mcam_worn"};
-	};
+{
+waitUntil {uniform player == "U_Rangemaster"};
+player setObjectTextureGlobal [0,"textures\uniformes\policia\soldado.jpg"];
+waitUntil {uniform player != "U_Rangemaster"};
 };
-//End CLothes
+};
+
+//Sargento
+[] spawn
+{
+while {true} do
+{
+waitUntil {uniform player == "U_Rangemaster"};
+player setObjectTextureGlobal [0,"textures\uniformes\policia\sargento.jpg"];
+waitUntil {uniform player != "U_Rangemaster"};
+};
+};
+
+//Tenente
+[] spawn
+{
+while {true} do
+{
+waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
+player setObjectTextureGlobal [0,"textures\uniformes\policia\tenente.jpg"];
+waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+};
+};
+
+
+//Capitao
+[] spawn
+{
+while {true} do
+{
+waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
+player setObjectTextureGlobal [0,"textures\uniformes\policia\capitao.jpg"];
+waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+};
+};
+
+//Major
+[] spawn
+{
+while {true} do
+{
+waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
+player setObjectTextureGlobal [0,"textures\uniformes\policia\major.jpg"];
+waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+};
+};
+
+//Coronel
+[] spawn
+{
+while {true} do
+{
+waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
+player setObjectTextureGlobal [0,"textures\uniformes\policia\coronel.jpg"];
+waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+};
+};
+
+[] call life_fnc_reloadUniforms;
+[] spawn life_fnc_placeablesInit;

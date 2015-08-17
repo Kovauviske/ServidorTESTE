@@ -30,7 +30,7 @@ class life_progress
 		class ProgressText : Life_RscText
 		{
 			idc = 38202;
-			text = "Cortando carne (50%)...";
+			text = "Servicing Chopper (50%)...";
 			x = 0.386 * safezoneW + safezoneX;
 			y = 0.0635 * safezoneH + safezoneY;
 			w = 0.65; h = (1 / 25);
@@ -72,4 +72,40 @@ class life_timer
 			h = 0.055 * safezoneH;
 		};
 	};
+};
+ 
+class life_nlrtimer
+{
+    name = "life_nlrtimer";
+    idd = 38300;
+    fadeIn = 1;
+    duration = 99999999999;
+    fadeout = 1;
+    movingEnable = 0;
+    onLoad = "uiNamespace setVariable['life_nlrtimer',_this select 0]";
+    objects[] = {};
+ 
+    class controlsBackground
+    {
+        class TimerIcon : life_RscPicture
+        {
+            idc = -1;
+            text = "\a3\ui_f\data\IGUI\RscTitles\MPProgress\timer_ca.paa";
+            x = 0.00499997 * safezoneW + safezoneX;
+            y = 0.691 * safezoneH + safezoneY;
+            w = 0.04;
+            h = 0.045;
+        };
+ 
+        class TimerText : life_RscText
+        {
+            colorBackground[] = {0,0,0,0};
+            idc = 38301;
+            text = "";
+            x = 0.0204688 * safezoneW + safezoneX;
+            y = 0.6778 * safezoneH + safezoneY;
+            w = 0.09125 * safezoneW;
+            h = 0.055 * safezoneH;
+        };
+    };
 };

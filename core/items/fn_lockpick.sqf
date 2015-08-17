@@ -19,9 +19,10 @@ if(_isVehicle && _curTarget in life_vehicles) exitWith {hint localize "STR_ISTR_
 if(!_isVehicle && !isPlayer _curTarget) exitWith {};
 if(!_isVehicle && !(_curTarget getVariable["restrained",false])) exitWith {};
 
+// Car Alarm
 _title = format[localize "STR_ISTR_Lock_Process",if(!_isVehicle) then {"Handcuffs"} else {getText(configFile >> "CfgVehicles" >> (typeOf _curTarget) >> "displayName")}];
 life_action_inUse = true; //Lock out other actions
-[[player, "caralarm",10],"life_fnc_playSound",true,false] spawn life_fnc_MP;
+[[_curTarget],"life_fnc_CarAlarmSound",nil,true] spawn life_fnc_MP;
 
 //Setup the progress bar
 disableSerialization;
@@ -36,7 +37,8 @@ _cP = 0.01;
 while {true} do
 {
 	if(animationState player != "AinvPknlMstpSnonWnonDnon_medic_1") then {
-		[[player,"AinvPknlMstpSnonWnonDnon_medic_1"],"life_fnc_animSync",true,false] spawn life_fnc_MP;
+		[[player,"AinvPknlMstpSnonWnonDnon_medic_1",true],"life_fnc_animSync",true,false] call life_fnc_MP;
+		player switchMove "AinvPknlMstpSnonWnonDnon_medic_1";
 		player playMoveNow "AinvPknlMstpSnonWnonDnon_medic_1";
 	};
 	sleep 0.26;
@@ -50,21 +52,21 @@ while {true} do
 	_progressBar progressSetPosition _cP;
 	_titleText ctrlSetText format["%3 (%1%2)...",round(_cP * 100),"%",_title];
 	if(_cP >= 1 OR !alive player) exitWith {};
-	if(life_istazed) exitWith {}; //Tazed
-	if(life_interrupted) exitWith {};
-	if((player getVariable["restrained",false])) exitWith {};
-	if(player distance _curTarget > _distance) exitWith {_badDistance = true;};
+	if(life_istazed) exitWith {_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];}; //Tazed
+	if(life_interrupted) exitWith {_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+	if((player getVariable["restrained",false])) exitWith {_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+	if(player distance _curTarget > _distance) exitWith {_badDistance = true;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
 };
 
 //Kill the UI display and check for various states
 5 cutText ["","PLAIN"];
 player playActionNow "stop";
-if(!alive player OR life_istazed) exitWith {life_action_inUse = false;};
-if((player getVariable["restrained",false])) exitWith {life_action_inUse = false;};
-if(!isNil "_badDistance") exitWith {titleText[localize "STR_ISTR_Lock_TooFar","PLAIN"]; life_action_inUse = false;};
-if(life_interrupted) exitWith {life_interrupted = false; titleText[localize "STR_NOTF_ActionCancel","PLAIN"]; life_action_inUse = false;};
-if(!([false,"lockpick",1] call life_fnc_handleInv)) exitWith {life_action_inUse = false;};
-
+if(!alive player OR life_istazed) exitWith {life_action_inUse = false;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+if((player getVariable["restrained",false])) exitWith {life_action_inUse = false;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+if(!isNil "_badDistance") exitWith {titleText[localize "STR_ISTR_Lock_TooFar","PLAIN"]; life_action_inUse = false;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+if(life_interrupted) exitWith {life_interrupted = false; titleText[localize "STR_NOTF_ActionCancel","PLAIN"]; life_action_inUse = false;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+if(!([false,"lockpick",1] call life_fnc_handleInv)) exitWith {life_action_inUse = false;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];
 life_action_inUse = false;
 
 if(!_isVehicle) then {
@@ -75,12 +77,11 @@ if(!_isVehicle) then {
 	_dice = random(100);
 	if(_dice < 30) then {
 		titleText[localize "STR_ISTR_Lock_Success","PLAIN"];
-		_curTarget say3D "caralarm";
-		life_vehicles set[count life_vehicles,_curTarget];
-		[[getPlayerUID player,name player,"487"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
+		life_vehicles pushBack _curTarget;
+		[[getPlayerUID player,profileName,"487"],"life_fnc_wantedAdd",false,false] call life_fnc_MP;
 	} else {
-		[[getPlayerUID player,profileName,"215"],"life_fnc_wantedAdd",false,false] spawn life_fnc_MP;
-		[[0,"STR_ISTR_Lock_FailedNOTF",true,[profileName]],"life_fnc_broadcast",west,false] spawn life_fnc_MP;
+		[[getPlayerUID player,profileName,"215"],"life_fnc_wantedAdd",false,false] call life_fnc_MP;
+		[[0,"STR_ISTR_Lock_FailedNOTF",true,[profileName]],"life_fnc_broadcast",west,false] call life_fnc_MP;
 		titleText[localize "STR_ISTR_Lock_Failed","PLAIN"];
 	};
 };

@@ -1,11 +1,11 @@
 /*
 	File: fn_repairTruck.sqf
 	Author: Bryan "Tonic" Boardwine
-
+	
 	Description:
 	Main functionality for toolkits, to be revised in later version.
 */
-private["_veh","_upp","_ui","_progress","_pgText","_cP","_displayName"];
+private["_veh","_upp","_ui","_progress","_pgText","_cP","_displayName","_test"];
 _veh = cursorTarget;
 life_interrupted = false;
 if(isNull _veh) exitwith {};
@@ -15,7 +15,7 @@ if((_veh isKindOf "Car") OR (_veh isKindOf "Ship") OR (_veh isKindOf "Air")) the
 	{
 		life_action_inUse = true;
 		_displayName = getText(configFile >> "CfgVehicles" >> (typeOf _veh) >> "displayName");
-		_upp = format["Reparando %1",_displayName];
+		_upp = format[localize "STR_NOTF_Repairing",_displayName];
 		//Setup our progress bar.
 		disableSerialization;
 		5 cutRsc ["life_progress","PLAIN"];
@@ -25,12 +25,13 @@ if((_veh isKindOf "Car") OR (_veh isKindOf "Ship") OR (_veh isKindOf "Air")) the
 		_pgText ctrlSetText format["%2 (1%1)...","%",_upp];
 		_progress progressSetPosition 0.01;
 		_cP = 0.01;
-
+		
 		while{true} do
 		{
-			if(animationState player != "AinvPknlMstpSnonWnonDnon_medic4") then {
-				[[player,"AinvPknlMstpSnonWnonDnon_medic4"],"life_fnc_animSync",true,false] spawn life_fnc_MP;
-				player playMoveNow "AinvPknlMstpSnonWnonDnon_medic4";
+			if(animationState player != "AinvPknlMstpSnonWnonDnon_medic_1") then {
+				[[player,"AinvPknlMstpSnonWnonDnon_medic_1",true],"life_fnc_animSync",true,false] call life_fnc_MP;
+				player switchMove "AinvPknlMstpSnonWnonDnon_medic_1";
+				player playMoveNow "AinvPknlMstpSnonWnonDnon_medic_1";
 			};
 			sleep 0.27;
 			_cP = _cP + 0.01;
@@ -41,14 +42,15 @@ if((_veh isKindOf "Car") OR (_veh isKindOf "Ship") OR (_veh isKindOf "Air")) the
 			if(player != vehicle player) exitWith {_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
 			if(life_interrupted) exitWith {_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
 		};
-
+		
 		life_action_inUse = false;
 		5 cutText ["","PLAIN"];
 		player playActionNow "stop";
-		if(life_interrupted) exitWith {life_interrupted = false; titleText["Ação cancelada","PLAIN"]; life_action_inUse = false;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
-		if(player != vehicle player) exitWith {titleText["Você deve estar fora do veículo para consertá-lo.","PLAIN"];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+		if(life_interrupted) exitWith {life_interrupted = false; titleText[localize "STR_NOTF_ActionCancel","PLAIN"]; life_action_inUse = false;_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+		if(player != vehicle player) exitWith {titleText[localize "STR_NOTF_RepairingInVehicle","PLAIN"];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+		//player removeItem "ToolKit";
 		_veh setDamage 0;
-		titleText["Você reparou com sucesso o veículo.","PLAIN"];
+		titleText[localize "STR_NOTF_RepairedVehicle","PLAIN"];
 	};
 };
 _ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];

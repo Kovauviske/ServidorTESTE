@@ -1,3 +1,4 @@
+#include <macro.h>
 /*
 	File: fn_respawned.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -10,10 +11,8 @@ private["_handle"];
 life_use_atm = TRUE;
 life_hunger = 100;
 life_thirst = 100;
-life_battery = 50;
 life_carryWeight = 0;
-life_drink = 0;
-life_cash = 0; //Make sure we don't get our cash back.
+CASH = 0; //Make sure we don't get our cash back.
 life_respawned = false;
 player playMove "amovpercmstpsnonwnondnon";
 
@@ -34,18 +33,21 @@ switch(playerSide) do
 		_handle = [] spawn life_fnc_civLoadout;
 	};
 	case independent: {
-		_handle = [] spawn life_fnc_resetMedic;
+		_handle = [] spawn life_fnc_medicLoadout;
+	};
+	case east: {
+	    _handle = [] spawn life_fnc_adacLoadout;
 	};
 	waitUntil {scriptDone _handle};
 };
 
 //Cleanup of weapon containers near the body & hide it.
 if(!isNull life_corpse) then {
-	private["_containers"];
+	private "_containers";
 	life_corpse setVariable["Revive",TRUE,TRUE];
 	_containers = nearestObjects[life_corpse,["WeaponHolderSimulated"],5];
 	{deleteVehicle _x;} foreach _containers; //Delete the containers.
-	hideBody life_corpse;
+	deleteVehicle life_corpse;
 };
 
 //Destroy our camera...
@@ -62,7 +64,7 @@ if(life_is_arrested) exitWith {
 
 //Johnny law got me but didn't let the EMS revive me, reward them half the bounty.
 if(!isNil "life_copRecieve") then {
-	[[player,life_copRecieve,true],"life_fnc_wantedBounty",false,false] spawn life_fnc_MP;
+	[[getPlayerUID player,player,life_copRecieve,true],"life_fnc_wantedBounty",false,false] spawn life_fnc_MP;
 	life_copRecieve = nil;
 };
 
@@ -71,5 +73,29 @@ if(life_removeWanted) then {
 	[[getPlayerUID player],"life_fnc_wantedRemove",false,false] spawn life_fnc_MP;
 };
 
+switch(playerSide) do
+{
+	case east: {RemoveAllWeapons player;
+{player removeMagazine _x;} foreach (magazines player);
+removeUniform player;
+removeVest player;
+removeBackpack player;
+removeGoggles player;
+removeHeadGear player;
+{
+	player unassignItem _x;
+	player removeItem _x;
+} foreach (assignedItems player);
+
+//Load player with default adac gear.
+player addUniform "U_Rangemaster";
+player addItem "ItemMap";
+player assignItem "ItemMap";
+player addItem "ItemCompass";
+player assignItem "ItemCompass";
+player setObjectTextureGlobal [0,"textures\uniformes\brasforte\brasforte.paa"];};
+};
+
 [] call SOCK_fnc_updateRequest;
 [] call life_fnc_hudUpdate; //Request update of hud.
+[] call life_fnc_reloadUniforms;
