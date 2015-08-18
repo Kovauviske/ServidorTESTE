@@ -7,16 +7,6 @@
 	Gives the selected amount of money to the selected player.
 */
 private["_unit","_amount"];
-
-if(!allowedToGive) exitWith {hint localize "STR_NOTF_Give_Money";};
-if(allowedToGive) then {
-	allowedToGive = false;
-	[] spawn {
-		sleep 5;
-		allowedToGive = true;
-	};
-};
-
 _amount = ctrlText 2018;
 ctrlShow[2001,false];
 if((lbCurSel 2022) == -1) exitWith {hint "No one was selected!";ctrlShow[2001,true];};

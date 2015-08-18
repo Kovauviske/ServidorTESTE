@@ -22,7 +22,7 @@ if(!(EQUAL(_license,""))) then {
 };
 if(_exit) exitWith {};
 
-_flag = switch(playerSide) do {case west: {"cop"}; case independent: {"med"}; default {"civ"}; case east: {"adac"};};
+_flag = switch(playerSide) do {case west: {"cop"}; case independent: {"med"}; default {"civ"};};
 if(!(EQUAL(_flag,_shopSide))) exitWith {};
 
 /* Open up the menu */
@@ -35,7 +35,7 @@ if((SEL(_this,3) in ["bruce","dive","reb","kart","donator"] && playerSide != civ
 if((SEL(_this,3) == "reb" && !license_civ_rebel)) exitWith {hint localize "STR_Shop_NotaReb"; closeDialog 0;};
 if((SEL(_this,3) in ["cop"] && playerSide != west)) exitWith {hint localize "STR_Shop_NotaCop"; closeDialog 0;};
 if((SEL(_this,3) in ["dive"] && !license_civ_dive)) exitWith { hint localize "STR_Shop_NotaDive"; closeDialog 0;};
-if((SEL(_this,3) in ["adac"] && playerSide != east)) exitWith { hint localize "STR_Shop_NotaAdac"; closeDialog 0;};
+if((SEL(_this,3) in ["donator"] && !license_civ_donator)) exitWith { hint localize "STR_Shop_NotaDonator"; closeDialog 0;};
 
 _pos = [1000,1000,10000];
 _oldDir = getDir player;

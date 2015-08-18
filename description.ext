@@ -1,16 +1,14 @@
-#include "infiSTAR_AdminMenu.hpp"
-
-author = "Tonic";
-onLoadName = "BRASIL Altis Life RPG BR DANTAS";
-onLoadMission = "Altis Life RPG 4.0 - DANTAS Server l TeamSpeak3- dantashost.ts3dns.com";
+author = "Tonic, Itsyuka e equipe ATB";
+onLoadName = "Altis Life RPG v4.0";
+onLoadMission = "Missão desenvolvida por Tonic e editada por equipe ATB";
 joinUnassigned = 1;
 respawn = BASE;
-respawndelay = 0.5;
+respawndelay = 5;
 disabledAI = true;
 disableChannels[]={0,1,2};
 enableDebugConsole = 1;
+loadScreen = "textures\Placas\inicio.jpg";
 respawnDialog = 0;
-loadScreen = "textures\server.jpg";
 
 class Header
 {
@@ -50,13 +48,6 @@ class CfgFunctions
 class CfgSounds
 {
 	sounds[] = {};
-	
-	class intro
-	{
-		name = "civintro";
-		sound[] = {"\sounds\intro.ogg", 1.0, 1};
-		titles[] = {};
-	};	
 	class SirenLong
 	{
 		name = "SirenLong";
@@ -64,13 +55,13 @@ class CfgSounds
 		titles[] = {};
 	};
 	
-	class SireneResgate
+	class MedicSiren
 	{
-		name = "SireneResgate";
-		sound[] = {"\sounds\sirene_resgate.ogg", 1.0, 1};
+		name = "MedicSiren";
+		sound[] = {"\sounds\Siren_Med.ogg", 1.0, 1};
 		titles[] = {};
-	};	
-	
+	};
+
 	class tazersound
 	{
 		name = "Tazersound";
@@ -78,83 +69,76 @@ class CfgSounds
 		titles[] = {};
 	};
 	
+	class Intro
+   {
+        name = "intro";
+        sound[] = {"\sounds\intro.ogg", 1.0, 1};
+        titles[] = {};
+   };
+  
+  class alert
+ {
+    name = "alert";
+    sound[] = {"\sounds\alert.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  
+  	class car_lock
+    {
+        name ="Car_Lock";
+        sound[] = {"\sounds\car_lock.ogg", 1.0, 1};
+        titles[] = {};
+    };
+    
+    class car_unlock
+    {
+        name = "Car_Unlock";
+        sound[] = {"\sounds\car_unlock.ogg", 1.0, 1};
+        titles[] = {};
+    };
+	
+	class car_alarm
+    {
+		name = "car_alarm";
+		sound[] = {"\sounds\car_alarm.ogg", 1, 1};
+		titles[] = {};
+    };
+
 	class flashbang
 	{
 		name = "flashbang";
 		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
 		titles[] = {};
 	};
-	
-	class car_alarm
-	{
-		name = "car_alarm";
-		sound[] = {"\sounds\car_alarm.ogg", 1.0, 1};
-		titles[] = {};
-	};
-	
-	class car_lock
-	{
-		name = "car_lock";
-		sound[] = {"\sounds\lock.ogg", 1.0, 1};
-		titles[] = {};
-	};
- 
-	class car_unlock
-	{
-		name = "car_unlock";
-		sound[] = {"\sounds\unlock.ogg", 1.0, 1};
-		titles[] = {};
-	};	
-	
-	class papuda
-	{
-		name = "papuda";
-		sound[] = {"\sounds\prisao.ogg", db+0, 1.0};
-		titles[] = {};
-	};
-	
-	class handcuffs                                   
-    {                                                      
-        name = "handcuffs"; 
-        sound[] = {"\sounds\handcuffs.ogg", 0.25, 1}; 
-        titles[] = {}; 
-    }; 
-	class punch_break
-    {
-        name = "punch_break";
-        sound[] = {"\sounds\punch_break.ogg", 1.0, 1};
-        titles[] = {};
-    };
-	
 };
 
 class CfgDebriefing
 {
 	class NotWhitelisted
 	{
-		title = "A Missão Falhou";
-		subtitle = "Você não pode usar este slot";
-		description = "Você não pode usar esse slot porque você não tem as permissões adequadas, tente outro slot.";
+		title = "Mission Failed";
+		subtitle = "You are not white-listed to use this slot";
+		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
 	};
-	
+
 	class Blacklisted
 	{
-		title = "A Missão Falhou";
-		subtitle = "Você está na lista negra dos policiais";
-		description = "Você não tem permissão para ser um policial devido a ações anteriores e os admins o removeram.";
+		title = "Mission Failed";
+		subtitle = "You are blacklisted from cops";
+		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
 	};
-	
+
 	class SpyGlass
 	{
 		title = "The SpyGlass sees you";
-		subTitle = "Você foi detectado pelo SpyGlass";
-		description = "Você foi detectado usando cheater e isso foi relatado para os admins do servidor. Aproveite o seu dia.";
+		subTitle = "You were detected by the SpyGlass";
+		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
@@ -165,31 +149,31 @@ class CfgNotifications
 {
 	class MedicalRequestEmerg
 	{
-		title = "Pedido de Resgate";
+		title = "EMS Requested";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
 		description = "%1";
 		duration = 5;
 		priority = 7;
 	};
-	
+
 	class DeliveryAssigned
 	{
-		title = "Entrega Aceita";
+		title = "Delivery Job Accepted";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
 		description = "%1";
 		duration = 10;
 		priority = 7;
 	};
-	
+
 	class DeliveryFailed
 	{
-		title = "A Entrega Falhou";
+		title = "Delivery Job Failed";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
 		description = "%1";
 		duration = 7;
 		priority = 7;
 	};
-	
+
 	class DeliverySucceeded
 	{
 		title = "Delivery Job Completed";
@@ -198,25 +182,16 @@ class CfgNotifications
 		duration = 6;
 		priority = 6;
 	};
-	
-	class AdacMessage
-    {
-        title = "BrasForte";
-        iconPicture = "icons\messagenew.paa";
-        description = "%1";
-        duration = 10;
-        priority = 5;
-    };
-	
+
 	class TextMessage
 	{
-		title = "Você Recebeu Uma Mensagem";
+		title = "Received A Text Message";
 		iconPicture = "icons\messagenew.paa";
 		description = "%1";
 		duration = 10;
 		priority = 6;
 	};
-	
+
 	class PoliceDispatch
 	{
 		title = "911 Dispatch Center";
@@ -225,7 +200,7 @@ class CfgNotifications
 		duration = 10;
 		priority = 6;
 	};
-	
+
 	class AdminDispatch
 	{
 		title = "Admin Dispatch Center";
@@ -234,10 +209,10 @@ class CfgNotifications
 		duration = 10;
 		priority = 6;
 	};
-	
+
 	class AdminMessage
 	{
-		title = "Mensagem do Admin";
+		title = "Admin Message";
 		iconPicture = "icons\messageadmin.paa";
 		description = "%1";
 		duration = 10;

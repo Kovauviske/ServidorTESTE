@@ -67,18 +67,11 @@ switch (playerSide) do {
 		_handle = [] spawn life_fnc_initMedic;
 		waitUntil {scriptDone _handle};
 	};
-	case east: {
-		//Initialize ADAC and blah
-		_handle = [] spawn life_fnc_initAdac;
-		waitUntil {scriptDone _handle};
-	};
 };
 
 player SVAR ["restrained",false,true];
 player SVAR ["Escorting",false,true];
 player SVAR ["transporting",false,true];
-player SVAR ["missingOrgan",false,true];
-player SVAR ["hasOrgan",false,true];
 
 diag_log "Past Settings Init";
 [] execFSM "core\fsm\client.fsm";
@@ -112,11 +105,6 @@ life_fnc_moveIn = compileFinal
 
 [] spawn life_fnc_survival;
 
-[] execVM "core\welcomecredits.sqf";
-
 CONSTVAR(life_paycheck); //Make the paycheck static.
 if(EQUAL(LIFE_SETTINGS(getNumber,"enable_fatigue"),0)) then {player enableFatigue false;};
 [[getPlayerUID player,player getVariable["realname",name player]],"life_fnc_wantedProfUpdate",false,false] spawn life_fnc_MP;
-
-// Init automatically saving gear
-[] spawn life_fnc_autoSave;

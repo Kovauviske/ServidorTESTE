@@ -23,30 +23,21 @@ life_bail_paid = false;
 life_impound_inuse = false;
 life_action_inUse = false;
 life_spikestrip = ObjNull;
-life_respawn_timer = 1; //Scaled in minutes
+life_respawn_timer = 2.0; //Scaled in minutes
 life_knockout = false;
 life_interrupted = false;
 life_respawned = false;
 life_removeWanted = false;
 life_action_gathering = false;
+life_fadeSound = false;
 life_vdFoot = viewDistance;
 life_vdCar = viewDistance;
 life_vdAir = viewDistance;
 tawvd_addon_disable = true;
-life_god = false; // Admin menu
-life_frozen = false; // Admin menu
-life_markers = false; // Admin menu
-life_fadeSound = true; // Fone de ouvido
-allowedToSell = true;
-allowedToChop = true;
-allowedToTransfer = true;
-allowedToGive = true;
-allowedToStore = true;
-
+Life_request_timer = false;
 
 //Uniform price (0),Hat Price (1),Glasses Price (2),Vest Price (3),Backpack Price (4)
 life_clothing_purchase = [-1,-1,-1,-1,-1];
-
 /*
 *****************************
 ****** Weight Variables *****
@@ -68,32 +59,24 @@ life_delivery_in_progress = false;
 life_thirst = 100;
 life_hunger = 100;
 CASH = 0;
-life_nlrtimer_stop = false;
-life_nlrtimer_running = false;
-Life_request_timer = false;
 
 life_istazed = false;
 life_vehicles = [];
 
 switch (playerSide) do {
 	case west: {
-		BANK = 30000; //Starting Bank Money
-		life_paycheck = 5000; //Paycheck Amount
+		BANK = 60000; //Starting Bank Money
+		life_paycheck = 12500; //Paycheck Amount
 	};
 	
 	case civilian: {
-		BANK = 10000; //Starting Bank Money
-		life_paycheck = 1000; //Paycheck Amount
+		BANK = 60000; //Starting Bank Money
+		life_paycheck = 1500; //Paycheck Amount
 	};
 	
 	case independent: {
-		BANK = 30000;
-		life_paycheck = 5000;
-	};
-	
-	case east: {
-		BANK = 30000; //Starting Bank Money
-		life_paycheck = 5000; //Paycheck Amount
+		BANK = 60000;
+		life_paycheck = 7500;
 	};
 };
 

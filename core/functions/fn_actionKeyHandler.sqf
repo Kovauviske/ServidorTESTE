@@ -61,9 +61,9 @@ if(isPlayer _curTarget && _curTarget isKindOf "Man") then
 	{
 	    [_curTarget] call life_fnc_civInteractionMenu;
 	};
-		if((_curTarget getVariable["restrained",false]) && {!(player getVariable["restrained",false])} && !dialog && playerSide == east) exitWith
+		if((_curTarget getVariable["restrained",false]) && {!(player getVariable["restrained",false])} && !dialog && playerSide == independent) exitWith
 	{
-	    [_curTarget] call life_fnc_adacInteractionMenu;
+	    [_curTarget] call life_fnc_medInteractionMenu;
 	};
 } else {
 	//OK, it wasn't a player so what is it?

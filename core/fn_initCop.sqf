@@ -29,27 +29,18 @@ player setVariable["rank",(FETCH_CONST(life_coplevel)),true];
 [] call life_fnc_spawnMenu;
 waitUntil{!isNull (findDisplay 38500)}; //Wait for the spawn selection to be open.
 waitUntil{isNull (findDisplay 38500)}; //Wait for the spawn selection to be done.
+[] spawn life_fnc_placeablesInit;
 
 [] spawn
 {
 while {true} do
 	{
-		waitUntil {backpack player == "B_Carryall_khk"}; 
-		(backpackContainer player) setObjectTextureGlobal [0,"textures\mochilas\policia.paa"];
-		waitUntil {backpack player != "B_Carryall_khk"};
+		waitUntil {backpack player == "B_Carryall_cbr"}; 
+		(backpackContainer player) setObjectTextureGlobal [0,""];
+		waitUntil {backpack player != "B_Carryall_cbr"};
 	};
 };
 
-
-[] spawn
-{
-while {true} do
-	{
-		waitUntil {vest player == "V_TacVest_blk_POLICE"}; 
-		(vestContainer player) setObjectTextureGlobal [0,"textures\uniformes\policia\colete.paa"];
-		waitUntil {vest player != "V_TacVest_blk_POLICE"};
-	};
-};
 
 //Recruta
 [] spawn
@@ -57,7 +48,7 @@ while {true} do
 while {true} do
 {
 waitUntil {uniform player == "U_Rangemaster"};
-player setObjectTextureGlobal [0,"textures\uniformes\policia\recruta.jpg"];
+player setObjectTextureGlobal [0,"textures\Uniformes\Policia\roupa_recruta.paa"];
 waitUntil {uniform player != "U_Rangemaster"};
 };
 };
@@ -67,9 +58,9 @@ waitUntil {uniform player != "U_Rangemaster"};
 {
 while {true} do
 {
-waitUntil {uniform player == "U_Rangemaster"};
-player setObjectTextureGlobal [0,"textures\uniformes\policia\soldado.jpg"];
-waitUntil {uniform player != "U_Rangemaster"};
+waitUntil {uniform player == "U_I_G_resistanceLeader_F"};
+player setObjectTextureGlobal [0,"textures\Uniformes\Policia\roupa_soldado.paa"];
+waitUntil {uniform player != "U_I_G_resistanceLeader_F"};
 };
 };
 
@@ -78,9 +69,9 @@ waitUntil {uniform player != "U_Rangemaster"};
 {
 while {true} do
 {
-waitUntil {uniform player == "U_Rangemaster"};
-player setObjectTextureGlobal [0,"textures\uniformes\policia\sargento.jpg"];
-waitUntil {uniform player != "U_Rangemaster"};
+waitUntil {uniform player == "U_B_CTRG_1"};
+player setObjectTextureGlobal [0,"textures\Uniformes\Policia\roupa_sargento.paa"];
+waitUntil {uniform player != "U_B_CTRG_1"};
 };
 };
 
@@ -89,9 +80,9 @@ waitUntil {uniform player != "U_Rangemaster"};
 {
 while {true} do
 {
-waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
-player setObjectTextureGlobal [0,"textures\uniformes\policia\tenente.jpg"];
-waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+waitUntil {uniform player == "U_B_CTRG_1"};
+player setObjectTextureGlobal [0,"textures\Uniformes\Policia\roupa_sargento.paa"];
+waitUntil {uniform player != "U_B_CTRG_1"};
 };
 };
 
@@ -101,9 +92,9 @@ waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
 {
 while {true} do
 {
-waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
-player setObjectTextureGlobal [0,"textures\uniformes\policia\capitao.jpg"];
-waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+waitUntil {uniform player == "U_I_CombatUniform"};
+player setObjectTextureGlobal [0,"textures\uniformes\Policia\roupa_cot.paa"];
+waitUntil {uniform player != "U_I_CombatUniform"};
 };
 };
 
@@ -112,9 +103,9 @@ waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
 {
 while {true} do
 {
-waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
-player setObjectTextureGlobal [0,"textures\uniformes\policia\major.jpg"];
-waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+waitUntil {uniform player == "U_I_CombatUniform"};
+player setObjectTextureGlobal [0,"textures\Uniformes\Policia\roupa_cot.paa"];
+waitUntil {uniform player != "U_I_CombatUniform"};
 };
 };
 
@@ -123,9 +114,20 @@ waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
 {
 while {true} do
 {
-waitUntil {uniform player == "U_B_SpecopsUniform_sgg"};
-player setObjectTextureGlobal [0,"textures\uniformes\policia\coronel.jpg"];
-waitUntil {uniform player != "U_B_SpecopsUniform_sgg"};
+waitUntil {uniform player == "U_B_CombatUniform_mcam"};
+player setObjectTextureGlobal [0,"textures\Uniformes\Policia\roupa_coronel.paa"];
+waitUntil {uniform player != "U_B_CombatUniform_mcam"};
+};
+};
+
+//ROTA
+[] spawn
+{
+while {true} do
+{
+waitUntil {uniform player == "U_Competitor"};
+player setObjectTextureGlobal [0,"textures\Uniformes\Policia\roupa_bope.paa"];
+waitUntil {uniform player != "U_Competitor"};
 };
 };
 

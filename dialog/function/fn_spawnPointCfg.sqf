@@ -1,4 +1,3 @@
-#include <macro.h>
 /*
 	File: fn_spawnPointCfg.sqf
 	Author: Bryan "Tonic" Boardwine
@@ -18,22 +17,11 @@ switch (_side) do
 	case west:
 	{
 		_return = [
-			["cop_spawn_1","QG Kavala","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["cop_spawn_2","QG Pyrgos","\a3\ui_f\data\map\MapControl\fuelstation_ca.paa"],
-			["cop_spawn_3","QG Athira","\a3\ui_f\data\map\GroupIcons\badge_rotate_0_gs.paa"],
-			["cop_spawn_4","Base Operacional","\a3\ui_f\data\map\Markers\NATO\b_air.paa"],
-			["cop_spawn_7","Posto Policial","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["cop_spawn_5","Posto Avançado","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
-		];
-	};
-	
-	case east: 
-	{
-		_return = [
-			["spawn_adac_kavala","Kavala","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["spawn_adac_base","BrasForte 1","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["spawn_adac_base_2","BrasForte 2","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["spawn_adac_prisao","Prisão","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
+			["cop_spawn_1","HQ de Kavala","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
+			["cop_spawn_2","HQ de Pyrgos","\a3\ui_f\data\map\MapControl\fuelstation_ca.paa"],
+			["cop_spawn_3","HQ de Athira","\a3\ui_f\data\map\GroupIcons\badge_rotate_0_gs.paa"],
+			["cop_spawn_4","HQ ROTA","\a3\ui_f\data\map\Markers\NATO\b_air.paa"],
+			["cop_spawn_5","HQ de Sofia","\a3\ui_f\data\map\GroupIcons\badge_rotate_0_gs.paa"]
 		];
 	};
 	
@@ -42,35 +30,22 @@ switch (_side) do
 		_return = [
 			["civ_spawn_1","Kavala","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
 			["civ_spawn_2","Pyrgos","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["civ_spawn_3","Athira","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["civ_spawn_4","Sofia","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-			["civ_spawn_5","Panagia","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
-		];		
+			["civ_spawn_3","Athira","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
+		];
 		
 		// Spawn Rebelde
 		if(license_civ_rebel) then {		
 			_return = _return + [
-				["reb_spawn_1","Rebelde Central","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
-				["reb_spawn_2","Rebelde Norte","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
-				
+				["reb_spawn_1","Posto Rebelde","\a3\ui_f\data\map\MapControl\watertower_ca.paa"],
+				["reb_spawn_2","Posto Rebelde","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
+								
 			];
 		};
-		
-		//if(license_cop_swat) then{
-			//_return pushBack ["cop_spawn_cobra","Cobra Base 1",nil];
-		//};
 		
 		// Spawn Doador
 		if(license_civ_donator) then {
 			_return = _return + [
 				["spawn_donator","Área VIP","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
-			];
-		};		
-		
-		// Spawn Brother of War
-		if(license_civ_brothers_of_war) then {
-			_return = _return + [
-				["spawn_brothers_of_war","Brother of War","\a3\ui_f\data\map\MapControl\watertower_ca.paa"]
 			];
 		};		
 		
@@ -87,9 +62,8 @@ switch (_side) do
 	
 	case independent: {
 		_return = [
-			["medic_spawn_1","Kavala","\a3\ui_f\data\map\MapControl\hospital_ca.paa"],
-			["medic_spawn_2","Athira","\a3\ui_f\data\map\MapControl\hospital_ca.paa"],
-			["medic_spawn_3","Pyrgos","\a3\ui_f\data\map\MapControl\hospital_ca.paa"]
+			["medic_spawn_1","Hospital de Kavala","\a3\ui_f\data\map\MapControl\hospital_ca.paa"],
+			["medic_spawn_2","Hospital de Athira","\a3\ui_f\data\map\MapControl\hospital_ca.paa"]
 		];
 	};
 };

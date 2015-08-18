@@ -23,60 +23,19 @@ waitUntil{isNull (findDisplay 38500)}; //Wait for the spawn selection to be done
 {
 while {true} do
 	{
-		waitUntil {backpack player == "B_Kitbag_cbr"}; 
-		(backpackContainer player) setObjectTextureGlobal [0,"textures\mochilas\medico.paa"];
-		waitUntil {backpack player != "B_Kitbag_cbr"};
+		waitUntil {backpack player == "B_Carryall_oli"}; 
+		(backpackContainer player) setObjectTextureGlobal [0,""];
+		waitUntil {backpack player != "B_Carryall_oli"};
 	};
 };
 
+//Samu
 [] spawn
 {
 while {true} do
-	{
-		waitUntil {backpack player == "B_Bergen_sgg"}; 
-		(backpackContainer player) setObjectTextureGlobal [0,"textures\mochilas\mecanico.paa"];
-		waitUntil {backpack player != "B_Bergen_sgg"};		
-	};
-};
-
-[] spawn
 {
-	private["_texture"];
-	while {true} do
-	{
-		waitUntil{uniform player == "U_Rangemaster"};
-		_texture =
-		switch (FETCH_CONST(life_mediclevel)) do
-		{
-			case 1: {"textures\uniformes\resgate\medico.jpg"};
-			case 2: {"textures\uniformes\resgate\medico.jpg"};
-			case 3: {"textures\uniformes\resgate\medico.jpg"};
-			case 4: {"textures\uniformes\resgate\medico.jpg"};
-			case 5: {"textures\uniformes\resgate\medico.jpg"};
-		};
-		
-		player setObjectTextureGlobal [0,_texture];
-		waitUntil{uniform player != "U_Rangemaster"};
-	};
+waitUntil {uniform player == "U_B_CombatUniform_mcam_vest"};
+player setObjectTextureGlobal [0,"textures\Uniformes\Samu\uniforme.paa"];
+waitUntil {uniform player != "U_B_CombatUniform_mcam_vest"};
 };
-
-[] spawn
-{
-	private["_texture"];
-	while {true} do
-	{
-		waitUntil{uniform player == "U_C_WorkerCoveralls"};
-		_texture =
-		switch (FETCH_CONST(life_mediclevel)) do
-		{
-			case 1: {"textures\uniformes\mecanico\mecanico.jpg"};
-			case 2: {"textures\uniformes\mecanico\mecanico.jpg"};
-			case 3: {"textures\uniformes\mecanico\mecanico.jpg"};
-			case 4: {"textures\uniformes\mecanico\mecanico.jpg"};
-			case 5: {"textures\uniformes\mecanico\mecanico.jpg"};
-		};
-		
-		player setObjectTextureGlobal [0,_texture];
-		waitUntil{uniform player != "U_C_WorkerCoveralls"};
-	};
 };

@@ -11,7 +11,7 @@ _unit = SEL(_this,0);
 _container = SEL(_this,1);
 
 _isPack = FETCH_CONFIG2(getNumber,CONFIG_VEHICLES,typeOf _container,"isBackpack");
-if(EQUAL(_isPack,1 && playerSide != west)) exitWith {
+if(EQUAL(_isPack,1)) exitWith {
 	hint localize "STR_MISC_Backpack";
 	true;
 };

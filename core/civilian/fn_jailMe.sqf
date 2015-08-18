@@ -8,34 +8,18 @@
 private["_ret","_bad","_time","_bail","_esc","_countDown"];
 _ret = [_this,0,[],[[]]] call BIS_fnc_param;
 _bad = [_this,1,false,[false]] call BIS_fnc_param;
-_time = [_this,2,15,[0]] call BIS_fnc_param; //##80
+if(_bad) then { _time = time + 1100; } else { _time = time + (15 * 60); };
 
-_time = time + (_time * 60); //x Minutes
-
-//if(_bad) then { _time = time + 1100; } else { _time = time + (15 * 60); };
-
-if(count _ret > 0) then { life_bail_amount = SEL(_ret,3); } else { life_bail_amount = 20000; /*_time = time + (10 * 60);*/ };
+if(count _ret > 0) then { life_bail_amount = SEL(_ret,3); } else { life_bail_amount = 1500; _time = time + (10 * 60); };
 _esc = false;
 _bail = false;
 
-_clothings = ["U_C_Poloshirt_blue","U_C_Poloshirt_burgundy","U_C_Poloshirt_stripped","U_C_Poloshirt_tricolour","U_C_Poloshirt_salmon","U_C_Poloshirt_redwhite","U_C_Commoner1_1"];
-
-["U_C_WorkerCoveralls",true] call life_fnc_handleItem;
-waitUntil {uniform player == "U_C_WorkerCoveralls"};
-[player, true] call life_fnc_reloadUniforms;
-removeVest player;
-removeHeadgear player;
-
-if(_time <= 0) then { _time = time + (15 * 60); hintC "Please Report to Admin: JAIL_FALLBACK_15, time is zero!"; };
-
-[_bad,_time] spawn
-{
+[_bad] spawn {
 	life_canpay_bail = false;
-	life_bail_amount = life_bail_amount * 5;
 	if(_this select 0) then {
-		sleep ( (_this select 1) * 0.5 );
+		sleep (10 * 60);
 	} else {
-		sleep ( (_this select 1) * 0.2 );
+		sleep (5 * 60);
 	};
 	life_canpay_bail = nil;
 };
@@ -47,7 +31,7 @@ while {true} do
 		hintSilent parseText format[(localize "STR_Jail_Time")+ "<br/> <t size='2'><t color='#FF0000'>%1</t></t><br/><br/>" +(localize "STR_Jail_Pay")+ " %3<br/>" +(localize "STR_Jail_Price")+ " $%2",_countDown,[life_bail_amount] call life_fnc_numberText,if(isNil "life_canpay_bail") then {"Yes"} else {"No"}];
 	};
 	
-	if(player distance (getMarkerPos "jail_marker") > 100) exitWith {
+	if(player distance (getMarkerPos "jail_marker") > 60) exitWith {
 		_esc = true;
 	};
 	

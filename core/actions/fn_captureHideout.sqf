@@ -1,12 +1,13 @@
 #include <macro.h>
 /*
 	Author: Bryan "Tonic" Boardwine
-	
+
 	Description:
 	Blah blah.
 */
-private["_group","_hideout","_action","_cpRate","_cP","_progressBar","_title","_titleText","_ui","_flagTexture"];
-_hideout = (nearestObjects[getPosATL player,["Land_u_Barracks_V2_F","Land_i_Barracks_V2_F"],25]) select 0;
+private["_group","_hideout","_action","_cpRate","_cP","_progressBar","_title","_titleText","_ui","_flagTexture","_markername","_gangname2"];
+/*_hideout = (nearestObjects[getPosATL player,["Land_u_Barracks_V2_F","Land_i_Barracks_V2_F"],25]) select 0;*/
+_hideout = (nearestObjects[getPos player,["FlagPole_F"],40]) select 0;
 _group = _hideout getVariable ["gangOwner",grpNull];
 
 if(isNil {grpPlayer getVariable "gang_name"}) exitWith {titleText[localize "STR_GNOTF_CreateGang","PLAIN"];};
@@ -20,7 +21,7 @@ if(!isNull _group) then {
 		localize "STR_Global_Yes",
 		localize "STR_Global_No"
 	] call BIS_fnc_guiMessage;
-	
+
 	_cpRate = 0.0045;
 } else {
 	_cpRate = 0.0075;
@@ -58,17 +59,17 @@ while {true} do
 	_progressBar progressSetPosition _cP;
 	_titleText ctrlSetText format["%3 (%1%2)...",round(_cP * 100),"%",_title];
 	_hideout setVariable["inCapture",true,true];
-	if(_cP >= 1 OR !alive player) exitWith {_hideout setVariable["inCapture",false,true];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
-	if(life_istazed) exitWith {_hideout setVariable["inCapture",false,true];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];}; //Tazed
-	if(life_interrupted) exitWith {_hideout setVariable["inCapture",false,true];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+	if(_cP >= 1 OR !alive player) exitWith {_hideout setVariable["inCapture",false,true];};
+	if(life_istazed) exitWith {_hideout setVariable["inCapture",false,true];}; //Tazed
+	if(life_interrupted) exitWith {_hideout setVariable["inCapture",false,true];};
 };
 
 //Kill the UI display and check for various states
 5 cutText ["","PLAIN"];
 player playActionNow "stop";
-if(!alive player OR life_istazed) exitWith {life_action_inUse = false;_hideout setVariable["inCapture",false,true];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
-if((player getVariable["restrained",false])) exitWith {life_action_inUse = false;_hideout setVariable["inCapture",false,true];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
-if(life_interrupted) exitWith {life_interrupted = false; titleText[localize "STR_GNOTF_CaptureCancel","PLAIN"]; life_action_inUse = false;_hideout setVariable["inCapture",false,true];_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];};
+if(!alive player OR life_istazed) exitWith {life_action_inUse = false;_hideout setVariable["inCapture",false,true];};
+if((player getVariable["restrained",false])) exitWith {life_action_inUse = false;_hideout setVariable["inCapture",false,true];};
+if(life_interrupted) exitWith {life_interrupted = false; titleText[localize "STR_GNOTF_CaptureCancel","PLAIN"]; life_action_inUse = false;_hideout setVariable["inCapture",false,true];};
 life_action_inUse = false;
 
 titleText["Hideout has been captured.","PLAIN"];
@@ -86,4 +87,27 @@ _this select 0 setFlagTexture _flagTexture;
 [[[0,1],"STR_GNOTF_CaptureSuccess",true,[name player,(group player) getVariable "gang_name"]],"life_fnc_broadcast",true,false] call life_fnc_MP;
 _hideout setVariable["inCapture",false,true];
 _hideout setVariable["gangOwner",grpPlayer,true];
-_ui = "osefStatusBar" call BIS_fnc_rscLayer;_ui cutRsc["osefStatusBar","PLAIN"];
+
+
+
+
+// CREATE MARKER AT MAP BY Pictureclass
+
+_markername = str(getPos _hideout);
+_gangname2 = formatText["Capturado por: %1",(group player) getVariable "gang_name"];
+if (getMarkerColor _markername == "") then
+{
+	gang_owner_marker = createMarker [_markername, position player];
+	_markername setMarkerShape "ICON";
+	_markername setMarkerType "hd_warning";
+	_markername setMarkerColor "ColorBlue";
+	_markername setMarkerText str(_gangname2);
+	gang_owner_marker = "";
+}
+else
+{
+	_markername setMarkerText str(_gangname2);
+};
+
+_hideout setVariable["inCapture",false,true];
+_hideout setVariable["gangOwner",grpPlayer,true];

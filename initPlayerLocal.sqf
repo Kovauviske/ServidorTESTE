@@ -8,13 +8,8 @@
 if(!hasInterface) exitWith {}; //This is a headless client, he doesn't need to do anything but keep being headless..
 #define CONST(var1,var2) var1 = compileFinal (if(typeName var2 == "STRING") then {var2} else {str(var2)})
 CONST(BIS_fnc_endMission,BIS_fnc_endMission);
-
+[] execVM "SpyGlass\fn_initSpy.sqf";
 [] execVM "core\init.sqf";
-[] execVM "core\functions\fn_emptyFuel.sqf";
-
-// Desabilita o rádio
-enableRadio false; 
-enableSentences false;
 
 //Execute JIP code.
 if((_this select 1)) then {

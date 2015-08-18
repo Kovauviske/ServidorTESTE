@@ -6,18 +6,19 @@
 	Description:
 	Sell a virtual item to the store / shop
 */
-private["_type","_index","_price","_var","_amount","_name"];
-_mode = [_this,0,0,[0]] call BIS_fnc_param;
-if(!allowedToSell) exitWith {hint localize "STR_NOTF_Sell_Virt_Stop";};
-if(allowedToSell) then {
-	allowedToSell = false;
-	[] spawn {
-		sleep 1;
-		allowedToSell = true;
-	};
+private["_type","_index","_price","_amount","_name"];
+if(EQUAL(lbCurSel 2402,-1)) exitWith {};
+
+if(life_virtshop_wait) exitWith {hint "Aguarde 2 segundos antes de repetir esta ação";};
+
+
+[] spawn
+{
+	life_virtshop_wait = true;
+	sleep (2);
+	life_virtshop_wait = false;
 };
 
-if(EQUAL(lbCurSel 2402,-1)) exitWith {};
 _type = lbData[2402,(lbCurSel 2402)];
 _price = M_CONFIG(getNumber,"VirtualItems",_type,"sellPrice");
 if(EQUAL(_price,-1)) exitWith {};

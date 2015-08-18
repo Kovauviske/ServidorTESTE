@@ -19,8 +19,6 @@ switch (true) do {
 	case (player distance (getMarkerPos "oil_1") < 40) : {_mine = ["oil_unprocessed",1];};
 	case (player distance (getMarkerPos "oil_2") < 40) : {_mine = ["oil_unprocessed",1];};
 	case (player distance (getMarkerPos "rock_1") < 50): {_mine = ["rock",2];};
-	case (player distance (getMarkerPos "cana_1") < 50): {_mine = ["cana_unrefined",2];};
-	case (player distance (getMarkerPos "gas_1") < 50): {_mine = ["gas_unrefined",2];};
 	default {["", 0]};
 };
 //Mine check

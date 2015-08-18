@@ -19,7 +19,7 @@ _list = _display displayctrl 2401;
 	_list lbSetData [(lbSize _list)-1,str(_entry)];
 } forEach _info;
 
-ctrlSetText[2404,"Conexão Estabelicida"];
+ctrlSetText[2404,"Connection Established"];
 
 if(((lbSize _list)-1) == -1) then
 {

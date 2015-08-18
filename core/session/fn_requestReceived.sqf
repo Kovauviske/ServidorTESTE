@@ -38,7 +38,6 @@ BANK = parseNumber (SEL(_this,3));
 CONST(life_adminlevel,parseNumber (SEL(_this,4)));
 CONST(life_donator,0);
 
-
 //Loop through licenses
 if(count (SEL(_this,6)) > 0) then {
 	{SVAR_MNS [SEL(_x,0),SEL(_x,1)];} foreach (SEL(_this,6));
@@ -52,7 +51,6 @@ switch(playerSide) do {
 	case west: {
 		CONST(life_coplevel, parseNumber(SEL(_this,7)));
 		CONST(life_medicLevel,0);
-		CONST(life_adacLevel,0);
 		life_blacklisted = SEL(_this,9);
 	};
 
@@ -60,7 +58,6 @@ switch(playerSide) do {
 		life_is_arrested = SEL(_this,7);
 		CONST(life_coplevel, 0);
 		CONST(life_medicLevel, 0);
-		CONST(life_adacLevel,0);
 		life_houses = SEL(_this,9);
 		{
 			_house = nearestBuilding (call compile format["%1", SEL(_x,0)]);
@@ -77,13 +74,6 @@ switch(playerSide) do {
 	case independent: {
 		CONST(life_medicLevel, parseNumber(SEL(_this,7)));
 		CONST(life_coplevel,0);
-		CONST(life_adacLevel,0);
-	};
-	
-		case east: {
-		CONST(life_adaclevel, parseNumber(SEL(_this,7)));
-		CONST(life_medicLevel,0);
-		CONST(life_coplevel, 0);
 	};
 };
 

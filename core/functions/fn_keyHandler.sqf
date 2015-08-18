@@ -116,11 +116,11 @@ switch (_code) do {
 			[] call life_fnc_civrestrainAction;
 		};
 		
-		if(_shift && playerSide == east && !isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && (side cursorTarget == civilian) && alive cursorTarget && cursorTarget distance player < 3.5 && !(cursorTarget GVAR "Escorting") && !(cursorTarget GVAR "restrained") && speed cursorTarget < 1) then
+		if(_shift && playerSide == independent && !isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && (side cursorTarget == civilian) && alive cursorTarget && cursorTarget distance player < 3.5 && !(cursorTarget GVAR "Escorting") && !(cursorTarget GVAR "restrained") && speed cursorTarget < 1) then
 		{
-			[] call life_fnc_restrainAction;
+			[] call life_fnc_medrestrainAction;
 		};
-	
+		
 		//Robbing
 		if(_shift && playerSide == civilian && !isNull cursorTarget && cursorTarget isKindOf "Man" && isPlayer cursorTarget && alive cursorTarget && cursorTarget distance player < 4 && speed cursorTarget < 1) then
 		{
@@ -133,7 +133,7 @@ switch (_code) do {
 	};
 	
 	//Shift + G (surrender)
-	case 37:
+	case 34:
 	{
 		if(_shift) then {_handled = true;};
 
@@ -170,32 +170,13 @@ switch (_code) do {
 			};
 		};
 	};
-	
-	// O, police gate opener
-        case 24:
-	{
-		if (!_shift && !_alt && !_ctrlKey && (playerSide == west) && (vehicle player != player)) then {
-			[] call life_fnc_copOpener;
-		};
-	};
-	
-	// Shift+P = Fone de Ouvido
-	case 25:
-	{
-		if(_shift) then
-		{
-			[] call life_fnc_fadeSound;
-			_handled = true;
-		};
-	};	
-	
 	//L Key?
 	case 38: {
 		//If cop run checks for turning lights on.
 		if(_shift && playerSide in [west,independent]) then {
 			if(vehicle player != player && (typeOf vehicle player) in ["C_Offroad_01_F","B_MRAP_01_F","C_SUV_01_F"]) then {
 				if(!isNil {vehicle player GVAR "lights"}) then {
-					if(playerSide == west || playerSide == independent) then {
+					if(playerSide == west) then {
 						[vehicle player] call life_fnc_sirenLights;
 					} else {
 						[vehicle player] call life_fnc_medicSirenLights;
@@ -214,6 +195,24 @@ switch (_code) do {
 			[] call life_fnc_p_openMenu;
 		};
 	};
+
+     // O, police gate opener
+        case 24:
+	{
+		if (!_shift && !_alt && !_ctrlKey && (playerSide == west) && (vehicle player != player)) then {
+			[] call life_fnc_copOpener;
+		};
+	};
+	
+	// Shift + P = Fone de Ouvido
+	case 25:
+	{
+		if(_shift) then
+		{
+			[] call life_fnc_fadeSound;
+			_handled = true;
+		};
+	};	
 	
 	//F Key
 	case 33: {
@@ -241,14 +240,6 @@ switch (_code) do {
 			};
 		};
 	};
-
-// NO SIDE VOICE
-if((_code in (actionKeys "PushToTalk") || _code in (actionKeys "PushToTalkSide") || _code in (actionKeys "PushToTalkAll") || _code in (actionKeys "PushToTalkDirect") || _code in (actionKeys "VoiceOverNet"))) exitWith {
-if (currentChannel in [life_radio_civ,7]) then
-    {
-        setCurrentChannel 5;
-    };
-};
 	
 	//U Key
 	case 22: {

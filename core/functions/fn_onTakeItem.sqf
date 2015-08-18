@@ -14,6 +14,7 @@ if(isNull _unit OR _item == "") exitWith {}; //Bad thingies?
 
 switch(playerSide) do
 {
+	case west: {}; //Blah
 	case civilian: {
 		//Currently stoping the civilians from taking the indep clothing from medics.
 		if(_item in ["U_I_CombatUniform"]) then {

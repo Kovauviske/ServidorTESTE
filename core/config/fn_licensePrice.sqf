@@ -19,11 +19,8 @@ switch (_type) do
 	case "oil": {10000}; //Oil processing license cost
 	case "cair": {15000}; //Cop Pilot License cost
 	case "swat": {35000}; //Swat License cost
-	case "bair": {12000}; //Brasforte Pilot License cost
-	case "bcar": {500}; //Brasforte car License cost
-	case "coastguard": {8000}; //Coast guard license cost
+	case "cg": {8000}; //Coast guard license cost
 	case "heroin": {25000}; //Heroin processing license cost
-	case "meth": {40000}; //Meth processing license cost
 	case "marijuana": {19500}; //Marijuana processing license cost
 	case "medmarijuana": {1500}; //Medical Marijuana processing license cost
 	case "gang": {10000}; //Gang license cost
@@ -32,15 +29,11 @@ switch (_type) do
 	case "diamond": {35000};
 	case "salt": {12000};
 	case "cocaine": {30000};
+	case "meth": {25000};
 	case "sand": {14500};
 	case "iron": {9500};
 	case "copper": {8000};
 	case "cement": {6500};
-	case "cana": {15000};
-	case "gas": {20000};
 	case "mair": {15000};
 	case "home": {75000};
-	case "donator": {750000000};
-	case "brothers_of_war": {750000000};
-
 };

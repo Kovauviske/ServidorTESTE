@@ -26,14 +26,14 @@ _retrievePrice = switch(playerSide) do {
 	case civilian: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"storageFee"),0)};
 	case west: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"storageFee"),1)};
 	case independent: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"storageFee"),2)};
-	case east: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"storageFee"),3)};
+	case east: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"storageFee"),4)};
 };
 
 _sellPrice = switch(playerSide) do {
 	case civilian: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"garageSell"),0)};
 	case west: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"garageSell"),1)};
 	case independent: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"garageSell"),2)};
-	case east: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"garageSell"),3)};
+	case east: {SEL(M_CONFIG(getArray,CONFIG_VEHICLES,_className,"garageSell"),4)};
 };
 
 if(!(EQUAL(typeName _sellPrice,typeName 0)) OR _sellPrice < 1) then {_sellPrice = 1000};

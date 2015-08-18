@@ -23,6 +23,7 @@ disableSerialization;
 _curTarget = [_this,0,ObjNull,[ObjNull]] call BIS_fnc_param;
 if(isNull _curTarget) exitWith {closeDialog 0;}; //Bad target
 _houseCfg = M_CONFIG(getNumber,"Houses",typeOf(_curTarget),"price");
+if (_houseCfg == 0) exitWith {closeDialog 0};
 
 _Btn1 = CONTROL(37400,Btn1);
 _Btn2 = CONTROL(37400,Btn2);
@@ -71,8 +72,6 @@ if(_curTarget isKindOf "House_F" && playerSide == west) exitWith {
 		};
 	};
 };
-
-if (_houseCfg == 0) exitWith {closeDialog 0};
 
 if(!(_curTarget in life_vehicles) OR isNil {_curTarget GVAR "house_owner"}) then {
 	if(_curTarget in life_vehicles) then {SUB(life_vehicles,[_curTarget]);};

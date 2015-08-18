@@ -14,4 +14,3 @@
 	};
 	
 } forEach (nearestObjects [player, ["Land_BarGate_F"], 10]);
-

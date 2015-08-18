@@ -8,8 +8,8 @@
     Edit the #defines below.
 */
 
-#define SAFETY_ZONES [["safe_kavala", 800], ["safe_brasforte", 250], ["safe_brasforte_2", 150], ["safe_athira", 300], ["safe_donator", 250], ["safe_rebeldesul", 200], ["safe_rebeldenorte", 200], ["safe_rebeldecentral", 200]] // Syntax: [["marker1", radius1], ["marker2", radius2], ...]
-#define MESSAGE "Você está em uma Area Segura!"
+#define SAFETY_ZONES [["safe_kavala", 800], ["safe_donator", 150], ["safe_rebeldesul", 80], ["safe_rebeldenorte", 130], ["safe_rebeldecentral", 200]] // Syntax: [["marker1", radius1], ["marker2", radius2], ...]
+#define MESSAGE "Você está em uma Área Segura!!!"
 
 if (isDedicated) exitWith {};
 waitUntil {!isNull player};

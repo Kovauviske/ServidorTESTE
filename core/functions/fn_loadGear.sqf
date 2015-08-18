@@ -12,6 +12,7 @@ waitUntil {!(isNull (findDisplay 46))};
 
 _handle = [] spawn life_fnc_stripDownPlayer;
 waitUntil {scriptDone _handle};
+
 if(EQUAL(count _itemArray,0)) exitWith {
     switch(playerSide) do {
         case west: {
@@ -24,10 +25,6 @@ if(EQUAL(count _itemArray,0)) exitWith {
 
         case independent: {
             [] call life_fnc_medicLoadout;
-        };
-		
-		case east: {
-            [] call life_fnc_adacLoadout;
         };
     };
 };

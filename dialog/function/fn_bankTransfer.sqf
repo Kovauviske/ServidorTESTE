@@ -7,16 +7,6 @@
 	Figure it out again.
 */
 private["_val","_unit","_tax"];
-
-if(!allowedToTransfer) exitWith {hint localize "STR_NOTF_Transfer_Money";};
-if(allowedToTransfer) then {
-	allowedToTransfer = false;
-	[] spawn {
-		sleep 5;
-		allowedToTransfer = true;
-	};
-};
-
 _val = parseNumber(ctrlText 2702);
 _unit = call compile format["%1",(lbData[2703,(lbCurSel 2703)])];
 if(isNull _unit) exitWith {};

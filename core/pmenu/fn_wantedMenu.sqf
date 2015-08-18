@@ -28,6 +28,7 @@ lbClear _players;
 _list2 = CONTROL(2400,2407);
 lbClear _list2; //Purge the list
 
+
 _crimes = LIFE_SETTINGS(getArray,"crimes");
 
 {
@@ -35,7 +36,7 @@ _crimes = LIFE_SETTINGS(getArray,"crimes");
 	_list2 lbSetData [(lbSize _list2)-1,(_x select 2)];
 } foreach _crimes;
 
-ctrlSetText[2404,"Estabelencendo Conexão..."];
+ctrlSetText[2404,"Establishing connection..."];
 
 if(FETCH_CONST(life_coplevel) < 3 && FETCH_CONST(life_adminlevel) == 0) then
 {

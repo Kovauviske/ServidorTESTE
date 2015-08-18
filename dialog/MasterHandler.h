@@ -24,7 +24,5 @@
 #include "vehicleShop.h"
 #include "settings.h"
 #include "federalReserve.h"
+#include "placeables.hpp"
 #include "compensate.hpp"
-#include "slot_machine.hpp"
-#include "cop_placeables.hpp"
-#include "jail_time.hpp"

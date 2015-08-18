@@ -20,6 +20,6 @@ ctrlSetText[3501,(localize "STR_Civ_SafeInv")];
 [life_safeObj] call life_fnc_safeInventory;
 life_safeObj SVAR ["inUse",true,true];
 [life_safeObj] spawn {
-	waitUntil {isNull (findDisplay 3500)};
+	waitUntil {isNull (findDisplay 1)};
 	SEL(_this,0) SVAR ["inUse",false,true];
 };

@@ -14,17 +14,17 @@ if(!((typeOf _animalCorpse) in ["Hen_random_F","Cock_random_F","Goat_random_F","
 if(player distance _animalCorpse > 3.5) exitWith {};
 life_action_inUse = true;
  switch(typeOf _animalCorpse) do {
-	case "Hen_random_F": {_displayName = "Frango"; _item = "hen_raw";};
-	case "Cock_random_F": {_displayName = "Frango"; _item = "rooster_raw";};
-	case "Goat_random_F": {_displayName = "Cabra"; _item = "goat_raw";};
-	case "Sheep_random_F": {_displayName = "Ovelha"; _item = "sheep_raw";};
+	case "Hen_random_F": {_displayName = "Chicken"; _item = "hen_raw";};
+	case "Cock_random_F": {_displayName = "Rooster"; _item = "rooster_raw";};
+	case "Goat_random_F": {_displayName = "Goat"; _item = "goat_raw";};
+	case "Sheep_random_F": {_displayName = "Sheep"; _item = "sheep_raw";};
 	case "Rabbit_F": {_displayName = "Rabbit"; _item = "rabbit_raw";};
 	default {_displayName = ""; _item = "";};
 };
 
 if(EQUAL(_displayName,"")) exitWith {life_action_inUse = false;};
 
-_upp = format["Coletando carne de %1",_displayName];
+_upp = format["Gutting %1",_displayName];
 //Setup our progress bar.
 disableSerialization;
 5 cutRsc ["life_progress","PLAIN"];
@@ -61,7 +61,7 @@ if(player != vehicle player) exitWith {titleText[localize "STR_NOTF_RepairingInV
 
 if(([true,_item,1] call life_fnc_handleInv)) then {
 	deleteVehicle _animalCorpse;
-	titleText [format["Você coletou %1 KG de carne.",_displayName],"PLAIN"];
+	titleText [format["You have collected some raw %1 meat",_displayName],"PLAIN"];
 } else {
-	titleText ["Seu inventário está cheio.","PLAIN"];
+	titleText ["Your inventory is full","PLAIN"];
 };

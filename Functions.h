@@ -25,9 +25,9 @@ class Life_Client_Core
 		class initCiv {};
 		class initCop {};
 		class initMedic {};
-		class initAdac {};
 		class welcomeNotification {};
 		class survival {};
+		class initZeus {};
 	};
 	
 	class Admin
@@ -45,7 +45,7 @@ class Life_Client_Core
 		class adminCompensate {};
 		class adminGodMode {};
 		class adminFreeze {};
-		class adminMarkers {};		
+		class adminMarkers {};
 	};
 	
 	class Medical_System
@@ -64,8 +64,8 @@ class Life_Client_Core
 		class medicSirenLights {};
 		class medicLights {};
 		class medicSiren {};
-		class newLifeRule {};
-		class medicEnter {};
+		class medEnter {};
+		class medrestrain {};
 	};
 	
 	class Actions
@@ -80,7 +80,7 @@ class Life_Client_Core
 		class catchTurtle {};
 		class dpFinish {};
 		class dropFishingNet {};
-	//  class getDPMission {};
+		class getDPMission {};
 		class postBail {};
 		class processAction {};
 		class arrestAction {};
@@ -98,22 +98,15 @@ class Life_Client_Core
 		class ticketAction {};
 		class packupSpikes {};
 		class storeVehicle {};
+		class robShops {};
 		class robAction {};
 		class captureHideout {};
 		class gather {};
-	//	class gutAnimal {};
+		class gutAnimal {};
 		class surrender {};
 		class gatherMeth {};
+		class removeWeaponAction {};
 		class skyDive {};
-		class civRestrainAction {};
-		class hasOrgan {};
-		class robShops {};		
-		class robBank {};
-		class useCocaine {};
-		class useHeroin {};
-		class useMarijuana {};
-		class useMeth {};
-		class useWeed {};		
 	};
 	
 	class Housing
@@ -134,7 +127,6 @@ class Life_Client_Core
 		class garageRefund {};
 	};
 	
-		
 	class Config
 	{
 		file = "core\config";
@@ -212,10 +204,8 @@ class Life_Client_Core
 		class loadGear {};
 		class stripDownPlayer {};
 		class nearATM {};
-		class fadeSound {}; // Fone de ouvido
-		class emptyFuel {}; 
-		class autoSave {};
-		class reloadUniforms {}; 
+		class fadeSound {};
+		class seizeObjects {};
 	};
 	
 	class Network
@@ -245,10 +235,10 @@ class Life_Client_Core
 		class removeLicenses {};
 		class demoChargeTimer {};
 		class civLoadout {};
-		class freezePlayer {}; //Add This
+		class freezePlayer {};
+		class removeWeapons {};
 		class civInteractionMenu {};
-        class civRestrain {};
-		class takeOrgans {};
+		class civRestrain {};
 	};
 	
 	class Vehicle
@@ -267,7 +257,6 @@ class Life_Client_Core
 		class addVehicle2Chain {};
 		class civVInteractionMenu {};
         class medVInteractionMenu {};
-		class fuelManager {};
 	};
 	
 	class Cop
@@ -298,32 +287,9 @@ class Life_Client_Core
 		class ticketPaid {};
 		class wantedGrab {};
 		class copEnter {};
-		class copOpener {};
 		class seizeObjects {};
-        class seizePlayerWeapon {};
-		class seizePlayerWeaponAction {};
-		class showArrestDialog {}; //changed
-		class arrestDialog_Arrest {}; //changed
-	};		
-		
-	class CopPlaceables
-	{
-		file = "core\cop\placeables";
-		class placeablesInit {};
-		class placeablesMenu {};
-		class placeablesRemoveAll {};
-		class placeablePlace {};
-		class placeableCancel {};
-		class placeablesPlaceComplete {};
+		class copOpener {};
 	};
-
-    class Adac
-	{
-		file = "core\adac";
-		class adacLoadout {};
-		class restrain {};
-		class adacInteractionMenu {};
-	};	
 	
 	class Gangs
 	{
@@ -364,20 +330,6 @@ class Life_Client_Core
 		class chopShopMenu {};
 		class chopShopSelection {};
 		class chopShopSell {};
-		class clothing_donator {};
-		class slotmachine {}; 
-		class slotSpin {};
-	};
-	
-	class Nightclub 
-	{
-		file = "core\nightclub";
-		class nclights {};
-		class ncLightsOn {};
-		class ncstage {};
-		class ncsmoke {};
-		class ncflash {};
-		class ncFlashOn {};
 	};
 	
 	class Items
@@ -392,7 +344,8 @@ class Life_Client_Core
 		class blastingCharge {};
 		class defuseKit {};
 		class storageBox {};
-		class CarAlarmSound {}; // Alarme
+	    class weed {};
+		class CarAlarmSound {};
 		class pLockpick {};
 	};
 	
@@ -422,9 +375,20 @@ class Life_Client_Core
 		class wireTransfer {};
 	};
 	
+	class CopPlaceables
+	{
+		file = "core\cop\placeables";
+		class placeablesInit {};
+		class placeablesMenu {};
+		class placeablesRemoveAll {};
+		class placeablePlace {};
+		class placeableCancel {};
+		class placeablesPlaceComplete {};
+	};
+	
 	class Cam
 	{
 	   file ="core";
-	   class introCam {};
-	};	
+	   class IntroCam {};
+	};
 };

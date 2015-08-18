@@ -47,4 +47,7 @@ if(_action) then {
 		for "_i" from 1 to _numOfDoors do {
 			_house SVAR [format["bis_disabled_Door_%1",_i],1,true];
 		};
+	} else {
+		hint "Someone already own's this building.";
+	};
 };

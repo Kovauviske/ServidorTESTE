@@ -15,13 +15,6 @@ if([false,_food,1] call life_fnc_handleInv) then {
 	{
 		case "apple": {_val = 10};
 		case "rabbit":{ _val = 20};
-		case "rabbitgrilled":{ _val = 30};
-		case "salemagrilled":{ _val = 30};
-		case "ornategrilled":{ _val = 30};
-		case "mackerelgrilled":{ _val = 30};
-		case "tunagrilled":{ _val = 30};
-		case "mulletfried":{ _val = 30};
-		case "catsharkfried":{ _val = 30};
 		case "salema": {_val = 30};
 		case "ornate": {_val = 25};
 		case "mackerel": {_val = 30};

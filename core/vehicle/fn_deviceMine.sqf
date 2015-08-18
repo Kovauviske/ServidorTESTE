@@ -12,7 +12,7 @@ closeDialog 0; //Close the interaction menu.
 life_action_inUse = true; //Lock out the interaction menu for a bit..
 _weight = [_vehicle] call life_fnc_vehicleWeight;
 if((_weight select 1) >= (_weight select 0)) exitWith {hint localize "STR_NOTF_DeviceFull"; life_action_inUse = false;};
-_resourceZones = ["apple_1","apple_2","apple_3","apple_4","peaches_1","peaches_2","peaches_3","peaches_4","heroin_1","meth_1","meth_2","cocaine_1","cocaine_2","weed_1","weed_2","lead_1","iron_1","salt_1","sand_1","diamond_1","oil_1","oil_2","rock_1","cana_1","gas_1"];
+_resourceZones = ["apple_1","apple_2","apple_3","apple_4","peaches_1","peaches_2","peaches_3","meth_1","peaches_4","heroin_1","cocaine_1","weed_1","lead_1","iron_1","salt_1","sand_1","diamond_1","oil_1","oil_2","rock_1"];
 _zone = "";
 
 //Find out what zone we're near
@@ -30,9 +30,8 @@ _item = switch(true) do {
 	case (_zone in ["apple_1","apple_2","apple_3","apple_4"]): {"apple"};
 	case (_zone in ["peaches_1","peaches_2","peaches_3","peaches_4"]): {"peach"};
 	case (_zone in ["heroin_1"]): {"heroin_unprocessed"};
-	case (_zone in ["meth_1","meth_2"]): {"meth_unprocessed"};
-	case (_zone in ["cocaine_1","cocaine_2"]): {"cocaine_unprocessed"};
-	case (_zone in ["weed_1","weed_2"]): {"cannabis"};
+	case (_zone in ["cocaine_1"]): {"cocaine_unprocessed"};
+	case (_zone in ["weed_1"]): {"cannabis"};
 	case (_zone in ["lead_1"]): {"copper_unrefined"};
 	case (_zone in ["iron_1"]): {"iron_unrefined"};
 	case (_zone in ["salt_1"]): {"salt_unrefined"};
@@ -40,8 +39,7 @@ _item = switch(true) do {
 	case (_zone in ["diamond_1"]): {"diamond_uncut"};
 	case (_zone in ["oil_1","oil_2"]): {"oil_unprocessed"};
 	case (_zone in ["rock_1"]): {"rock"};
-	case (_zone in ["cana_1"]): {"cana_unrefined"};
-	case (_zone in ["gas_1"]): {"gas_unrefined"};
+	case (_zone in ["meth_1"]): {"meth_unprocessed"};
 	default {""};
 };
 

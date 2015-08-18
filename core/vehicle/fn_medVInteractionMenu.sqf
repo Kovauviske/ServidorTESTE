@@ -85,5 +85,3 @@ _Btn4 ctrlShow false;
 _Btn5 ctrlShow false;
 //Button 6 - undefined
 _Btn6 ctrlShow false;
-
-while { {alive _x && side _x == independent} count allUnits > 0; } do { ctrlEnable [37455,false]; };  igloud 

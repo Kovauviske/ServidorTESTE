@@ -45,27 +45,5 @@ if(!isNull _source) then {
 	};
 };
 
-if (vehicle _unit == _unit) then
-		{
-			if ( _source isKindOf "Air" OR _source isKindOf "Car" OR _source isKindOf "Boat" ) then
-			{
-				diag_log "A origem é um veículo, mas não há um jogador dirigindo o veículo.";
-			}
-			else
-			{		
-				_isVehicle = vehicle _source;
-				if (_isVehicle isKindOf "Air" OR _isVehicle isKindOf "Car" OR _isVehicle isKindOf "Boat") then 
-				{
-					_damage = 0;
-					_damageHandle = false;
-					hint "Não é possivel você morrer atropelado. Levante-se!";
-					[[player,"amovppnemstpsraswrfldnon"],"life_fnc_animSync",true,false] spawn life_fnc_MP;
-				};
-			};
-		};
-	};
-};
-
-
 [] call life_fnc_hudUpdate;
 _damage;

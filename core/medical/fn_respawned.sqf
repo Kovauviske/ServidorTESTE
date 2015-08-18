@@ -35,9 +35,6 @@ switch(playerSide) do
 	case independent: {
 		_handle = [] spawn life_fnc_medicLoadout;
 	};
-	case east: {
-	    _handle = [] spawn life_fnc_adacLoadout;
-	};
 	waitUntil {scriptDone _handle};
 };
 
@@ -47,7 +44,7 @@ if(!isNull life_corpse) then {
 	life_corpse setVariable["Revive",TRUE,TRUE];
 	_containers = nearestObjects[life_corpse,["WeaponHolderSimulated"],5];
 	{deleteVehicle _x;} foreach _containers; //Delete the containers.
-	deleteVehicle life_corpse;
+	hideBody life_corpse;
 };
 
 //Destroy our camera...
@@ -73,29 +70,5 @@ if(life_removeWanted) then {
 	[[getPlayerUID player],"life_fnc_wantedRemove",false,false] spawn life_fnc_MP;
 };
 
-switch(playerSide) do
-{
-	case east: {RemoveAllWeapons player;
-{player removeMagazine _x;} foreach (magazines player);
-removeUniform player;
-removeVest player;
-removeBackpack player;
-removeGoggles player;
-removeHeadGear player;
-{
-	player unassignItem _x;
-	player removeItem _x;
-} foreach (assignedItems player);
-
-//Load player with default adac gear.
-player addUniform "U_Rangemaster";
-player addItem "ItemMap";
-player assignItem "ItemMap";
-player addItem "ItemCompass";
-player assignItem "ItemCompass";
-player setObjectTextureGlobal [0,"textures\uniformes\brasforte\brasforte.paa"];};
-};
-
 [] call SOCK_fnc_updateRequest;
 [] call life_fnc_hudUpdate; //Request update of hud.
-[] call life_fnc_reloadUniforms;

@@ -28,6 +28,23 @@ switch (true) do {
 		};
 	};
 	
+	case (_item == "coffee"):
+	{
+		if(([false,_item,1] call life_fnc_handleInv)) then
+		{
+			life_thirst = 100;
+			player setFatigue 0;
+			[] spawn
+			{
+				life_redgull_effect = time;
+				titleText["Agora você está energizado!","PLAIN"];
+				player enableFatigue false;
+				waitUntil {!alive player OR ((time - life_redgull_effect) > (15 * 60))};
+				player enableFatigue true;
+			};
+		};
+	};
+	
 	case (EQUAL(_item,"boltcutter")): {
 		[cursorTarget] spawn life_fnc_boltcutter;
 		closeDialog 0;
@@ -38,6 +55,14 @@ switch (true) do {
 		(group player) reveal fed_bank;
 		[cursorTarget] spawn life_fnc_blastingCharge;
 	};
+	
+	case (_item == "marijuana"):
+    {
+    if(([false,_item,1] call life_fnc_handleInv)) then
+    {
+        [] spawn life_fnc_weed;
+     };
+  };
 	
 	case (EQUAL(_item,"defusekit")): {
 		[cursorTarget] spawn life_fnc_defuseKit;
@@ -70,8 +95,8 @@ switch (true) do {
 	case (EQUAL(_item,"handcuffkeys")): {
 		[] spawn life_fnc_handcuffkeys;
 	};
-
-	case (_item in ["apple","rabbitgrilled","salemaraw","ornateraw","mackerelraw","tunaraw","mulletraw","catsharkraw","turtle","turtlesoup","donuts","tbacon","peach"]): {
+	
+	case (_item in ["apple","rabbit_grilled","salema_grilled","ornate_grilled","mackerel_grilled","tuna_grilled","mullet_fried","catshark_fried","turtle","turtle_soup","donut","tbacon","peach"]): {
 		if(!(EQUAL(M_CONFIG(getNumber,"VirtualItems",_item,"edible"),-1))) then {
 			if([false,_item,1] call life_fnc_handleInv) then {
 				_val = M_CONFIG(getNumber,"VirtualItems",_item,"edible");
@@ -84,7 +109,7 @@ switch (true) do {
 			};
 		};
 	};
-
+	
 	case (_item == "kidney"):
 	{
 		if(([false,_item,1] call life_fnc_handleInv)) then
@@ -95,44 +120,9 @@ switch (true) do {
 			player setFatigue .5;
 		};
 	};
-	
+
 	case (EQUAL(_item,"pickaxe")): {
 		[] spawn life_fnc_pickAxeUse;
-	};
-	
-		case (EQUAL(_item,"heroin_processed")): {
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{			
-			[] spawn life_fnc_useHeroin;
-		};
-	};
-	
-			case (EQUAL(_item,"meth_processed")): {
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{			
-			[] spawn life_fnc_useMeth;
-		};
-	};
-	
-	case (EQUAL(_item,"marijuana")): {
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{
-			[] spawn life_fnc_useMarijuana;
-		};
-	};
-	
-	case (EQUAL(_item,"cocaine_processed")): {
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{			
-			[] spawn life_fnc_useCocaine;
-		};
-	};
-	
-	case (EQUAL(_item,"cannabis")): {
-		if(([false,_item,1] call life_fnc_handleInv)) then
-		{			
-			[] spawn life_fnc_useWeed;
-		};
 	};
 	
 	default {

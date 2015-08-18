@@ -43,28 +43,21 @@ _unit spawn
 	
 	_maxTime = time + (life_respawn_timer * 60);
 	_RespawnBtn ctrlEnable false;
-	waitUntil {_Timer ctrlSetText format["Respawn Disponível em: %1",[(_maxTime - time),"MM:SS.MS"] call BIS_fnc_secondsToString]; 
-	round(_maxTime - time) <= 0 || isNull _this || Life_request_timer};
+	waitUntil {_Timer ctrlSetText format["Respawn Available in: %1",[(_maxTime - time),"MM:SS.MS"] call BIS_fnc_secondsToString]; 
+    round(_maxTime - time) <= 0 || isNull _this || Life_request_timer};
 	
 	if (Life_request_timer) then {
-	_maxTime = time + (life_respawn_timer * 480);
-	waitUntil {_Timer ctrlSetText format["Respawn Disponível em: %1",[(_maxTime - time),"MM:SS.MS"] call BIS_fnc_secondsToString]; 
-	round(_maxTime - time) <= 0 || isNull _this};
+    _maxTime = time + (life_respawn_timer * 300);
+    waitUntil {_Timer ctrlSetText format["Respawn Available in: %1",[(_maxTime - time),"MM:SS.MS"] call BIS_fnc_secondsToString]; 
+    round(_maxTime - time) <= 0 || isNull _this};
 	};
-	Life_request_timer = false; //resets increased respawn timer
+    Life_request_timer = false; //resets increased respawn timer
 	
 	_RespawnBtn ctrlEnable true;
 	_Timer ctrlSetText localize "STR_Medic_Respawn_2";
 };
-	
-[] spawn life_fnc_deathScreen;
 
-if(life_nlrtimer_running) then
-{
-	life_nlrtimer_stop = true;
-	waitUntil {!life_nlrtimer_running};
-};
-[] spawn life_fnc_newLifeRule;
+[] spawn life_fnc_deathScreen;
 
 //Create a thread to follow with some what precision view of the corpse.
 [_unit] spawn
@@ -78,14 +71,12 @@ if(life_nlrtimer_running) then
 if(!isNull _killer && {_killer != _unit} && {side _killer != west} && {alive _killer}) then {
 	if(vehicle _killer isKindOf "LandVehicle") then {
 		[[getPlayerUID _killer,_killer getVariable["realname",name _killer],"187V"],"life_fnc_wantedAdd",false,false] call life_fnc_MP;
-		[[_killer],"life_fnc_wantedFetchForCivilian",_killer,false] spawn life_fnc_MP;
 		//Get rid of this if you don't want automatic vehicle license removal.
 		if(!local _killer) then {
 			[[2],"life_fnc_removeLicenses",_killer,FALSE] call life_fnc_MP;
 		};
 	} else {
 		[[getPlayerUID _killer,_killer getVariable["realname",name _killer],"187"],"life_fnc_wantedAdd",false,false] call life_fnc_MP;
-		[[_killer],"life_fnc_wantedFetchForCivilian",_killer,false] spawn life_fnc_MP;
 		
 		if(!local _killer) then {
 			[[3],"life_fnc_removeLicenses",_killer,FALSE] call life_fnc_MP;

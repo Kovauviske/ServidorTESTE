@@ -20,7 +20,7 @@ switch (_shop) do
 {
 	case "reb":
 	{
-		ctrlSetText[2505,"Loja Rebelde"];
+		ctrlSetText[2505,"Altis Rebel Shop"];
 		ctrlShow[2503,false];
 		ctrlShow[2513,false];
 		ctrlShow[2514,false];
@@ -28,19 +28,13 @@ switch (_shop) do
 	
 	case "cop":
 	{
-		ctrlSetText[2505,"Loja Policial"];
-		ctrlShow[2503,false];
-	};
-	
-	case "adac":
-	{
-		ctrlSetText[2505,"Loja Brasforte"];
+		ctrlSetText[2505,"Altis Cop Shop"];
 		ctrlShow[2503,false];
 	};
 	
 	case "gun":
 	{
-		ctrlSetText[2505,"Loja de Armas"];
+		ctrlSetText[2505,"Altis Gun Store"];
 		ctrlShow[2503,false];
 		ctrlShow[2513,false];
 		ctrlShow[2514,false];
@@ -48,7 +42,7 @@ switch (_shop) do
 	
 	case "gang":
 	{
-		ctrlSetText[2505,"Loja de Gangue"];
+		ctrlSetText[2505,"Gang Shop"];
 		ctrlShow[2503,false];
 		ctrlShow[2513,false];
 		ctrlShow[2514,false];
@@ -56,7 +50,7 @@ switch (_shop) do
 	
 	case "dive":
 	{
-		ctrlSetText[2505,"Loja de Mergulho"];
+		ctrlSetText[2505,"Altis Diving Shop"];
 		ctrlShow[2503,false];
 		ctrlShow[2510,false];
 		ctrlShow[2511,false];
@@ -65,50 +59,14 @@ switch (_shop) do
 	
 	case "donator":
 	{
-		ctrlSetText[2505,"Loja VIP"];
+		ctrlSetText[2505,"Donator Shop"];
 	};
-	
-	case "recruta":
-	{
-		ctrlSetText[2505,"Loja de Recruta"];
-		ctrlShow[2503,false];
-	};	
-	
-	case "soldado":
-	{
-		ctrlSetText[2505,"Loja de Soldado"];
-		ctrlShow[2503,false];
-	};	
 	
 	case "sergeant":
 	{
-		ctrlSetText[2505,"Loja de Sargento"];
+		ctrlSetText[2505,"Sergeants Shop"];
 		ctrlShow[2503,false];
 	};
-	
-	case "tenente":
-	{
-		ctrlSetText[2505,"Loja de Tenente"];
-		ctrlShow[2503,false];
-	};
-	
-	case "capitao":
-	{
-		ctrlSetText[2505,"Loja de Capitão"];
-		ctrlShow[2503,false];
-	};
-	
-	case "major":
-	{
-		ctrlSetText[2505,"Loja de Major"];
-		ctrlShow[2503,false];
-	};
-	
-	case "coronel":
-	{
-		ctrlSetText[2505,"Loja de Coronel"];
-		ctrlShow[2503,false];
-	};	
 	
 	case "gen":
 	{
@@ -118,13 +76,13 @@ switch (_shop) do
 	
 	case "officer":
 	{
-		ctrlSetText[2505,"Loja da PRF"];
+		ctrlSetText[2505,"Patrol Officer Shop"];
 		ctrlShow[2503,false];
 	};
 	
 	case "admin":
 	{
-		ctrlSetText[2505,"Loja de Admin"];
+		ctrlSetText[2505,"Admin Shop"];
 	};
 };
 

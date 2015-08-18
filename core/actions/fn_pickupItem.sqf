@@ -9,7 +9,7 @@
 */
 private ["_itemInfo","_itemName","_illegal","_diff"];
 if((time - life_action_delay) < 2) exitWith {hint "You can't rapidly use action keys!"; INUSE(_this);};
-if(isNull _this OR {player distance _this > 1}) exitWith {INUSE(_this);};
+if(isNull _this OR {player distance _this > 3}) exitWith {INUSE(_this);};
 
 _itemInfo = _this GVAR ["item",[]]; if(EQUAL(count _itemInfo,0)) exitWith {deleteVehicle _this;};
 _itemName = ITEM_NAME(SEL(_itemInfo,0));
