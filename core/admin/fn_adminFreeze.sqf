@@ -1,11 +1,11 @@
 #include <macro.h>
 /*
 	File: fn_adminFreeze.sqf
-	Author: ColinM9991
+	Author: _Fuzz
  
 	Description: Freezes selected player
 */
-if(FETCH_CONST(life_adminlevel) < 3) exitWith {closeDialog 0; hint localize "STR_ANOTF_ErrorLevel";};
+if(__GETC__(life_adminlevel) < 3) exitWith {closeDialog 0; hint localize "STR_ANOTF_ErrorLevel";};
 
 private["_unit"];
 _unit = lbData[2902,lbCurSel (2902)];

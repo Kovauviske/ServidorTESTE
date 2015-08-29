@@ -1,13 +1,12 @@
 #include <macro.h>
 /*
 	Author: Bryan "Tonic" Boardwine
-
+	
 	Description:
 	Blah blah.
 */
-private["_group","_hideout","_action","_cpRate","_cP","_progressBar","_title","_titleText","_ui","_flagTexture","_markername","_gangname2"];
-/*_hideout = (nearestObjects[getPosATL player,["Land_u_Barracks_V2_F","Land_i_Barracks_V2_F"],25]) select 0;*/
-_hideout = (nearestObjects[getPos player,["FlagPole_F"],40]) select 0;
+private["_group","_hideout","_action","_cpRate","_cP","_progressBar","_title","_titleText","_ui","_flagTexture"];
+_hideout = (nearestObjects[getPosATL player,["Land_u_Barracks_V2_F","Land_i_Barracks_V2_F"],25]) select 0;
 _group = _hideout getVariable ["gangOwner",grpNull];
 
 if(isNil {grpPlayer getVariable "gang_name"}) exitWith {titleText[localize "STR_GNOTF_CreateGang","PLAIN"];};
@@ -21,7 +20,7 @@ if(!isNull _group) then {
 		localize "STR_Global_Yes",
 		localize "STR_Global_No"
 	] call BIS_fnc_guiMessage;
-
+	
 	_cpRate = 0.0045;
 } else {
 	_cpRate = 0.0075;
@@ -44,8 +43,7 @@ _cP = 0.01;
 while {true} do
 {
 	if(animationState player != "AinvPknlMstpSnonWnonDnon_medic_1") then {
-		[[player,"AinvPknlMstpSnonWnonDnon_medic_1",true],"life_fnc_animSync",true,false] call life_fnc_MP;
-		player switchMove "AinvPknlMstpSnonWnonDnon_medic_1";
+		[[player,"AinvPknlMstpSnonWnonDnon_medic_1"],"life_fnc_animSync",true,false] spawn life_fnc_MP;
 		player playMoveNow "AinvPknlMstpSnonWnonDnon_medic_1";
 	};
 	sleep 0.26;
@@ -84,30 +82,6 @@ _flagTexture = [
 		"\A3\Data_F\Flags\flag_fd_orange_CO.paa"
 	] call BIS_fnc_selectRandom;
 _this select 0 setFlagTexture _flagTexture;
-[[[0,1],"STR_GNOTF_CaptureSuccess",true,[name player,(group player) getVariable "gang_name"]],"life_fnc_broadcast",true,false] call life_fnc_MP;
-_hideout setVariable["inCapture",false,true];
-_hideout setVariable["gangOwner",grpPlayer,true];
-
-
-
-
-// CREATE MARKER AT MAP BY Pictureclass
-
-_markername = str(getPos _hideout);
-_gangname2 = formatText["Capturado por: %1",(group player) getVariable "gang_name"];
-if (getMarkerColor _markername == "") then
-{
-	gang_owner_marker = createMarker [_markername, position player];
-	_markername setMarkerShape "ICON";
-	_markername setMarkerType "hd_warning";
-	_markername setMarkerColor "ColorBlue";
-	_markername setMarkerText str(_gangname2);
-	gang_owner_marker = "";
-}
-else
-{
-	_markername setMarkerText str(_gangname2);
-};
-
+[[[0,1],"STR_GNOTF_CaptureSuccess",true,[name player,(group player) getVariable "gang_name"]],"life_fnc_broadcast",true,false] spawn life_fnc_MP;
 _hideout setVariable["inCapture",false,true];
 _hideout setVariable["gangOwner",grpPlayer,true];

@@ -7,7 +7,7 @@ class Life_My_Gang_Diag {
 	
 	class controlsBackground {
 		class Life_RscTitleBackground:Life_RscText {
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
+			colorBackground[] = {0,0.6,0.298,1};
 			idc = -1;
 			x = 0.1;
 			y = 0.2;
@@ -61,7 +61,7 @@ class Life_My_Gang_Diag {
 		class GangLeave : Life_RscButtonMenu {
 			idc = -1;
 			text = "$STR_Gang_Leave";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			colorBackground[] = {0,0.6,0.298,0.5};
 			onButtonClick = "[] call life_fnc_gangLeave";
 			x = 0.47;
 			y = 0.26;
@@ -73,7 +73,7 @@ class Life_My_Gang_Diag {
 		{
 			idc = 2622;
 			text = "$STR_Gang_UpgradeSlots";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			colorBackground[] = {0,0.6,0.298,0.5};
 			onButtonClick = "[] spawn life_fnc_gangUpgrade";
 			x = 0.47;
 			y = 0.31;
@@ -85,7 +85,7 @@ class Life_My_Gang_Diag {
 		{
 			idc = 2624;
 			text = "$STR_Gang_Kick";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			colorBackground[] = {0,0.6,0.298,0.5};
 			onButtonClick = "[] call life_fnc_gangKick";
 			x = 0.47;
 			y = 0.36;
@@ -97,7 +97,7 @@ class Life_My_Gang_Diag {
 		{
 			idc = 2625;
 			text = "$STR_Gang_SetLeader";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			colorBackground[] = {0,0.6,0.298,0.5};
 			onButtonClick = "[] spawn life_fnc_gangNewLeader";
 			x = 0.47;
 			y = 0.41;
@@ -108,8 +108,8 @@ class Life_My_Gang_Diag {
 		class InviteMember : GangLeader
 		{
 			idc = 2630;
-			text = "$STR_Gang_Invite_Player";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			text = "Invite Player";
+			colorBackground[] = {0,0.6,0.298,0.5};
 			onButtonClick = "[] spawn life_fnc_gangInvitePlayer";
 			y = .51;
 		};
@@ -117,8 +117,8 @@ class Life_My_Gang_Diag {
 		class DisbandGang : InviteMember
 		{
 			idc = 2631;
-			text = "$STR_Gang_Disband_Gang";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			text = "Disband Gang";
+			colorBackground[] = {0,0.6,0.298,0.5};
 			onButtonClick = "[] spawn life_fnc_gangDisband";
 			y = .46;
 		};
@@ -131,6 +131,7 @@ class Life_My_Gang_Diag {
 		};
 		
 		class GangBank : Title {
+			x = 0.21;
 			idc = 601;
 			style = 1;
 			text = "";
@@ -143,11 +144,11 @@ class Life_Create_Gang_Diag {
 	name= "life_my_gang_menu_create";
 	movingEnable = false;
 	enableSimulation = true;
-	onLoad = "[] spawn {waitUntil {!isNull (findDisplay 2520)}; ((findDisplay 2520) displayCtrl 2523) ctrlSetText format[localize ""STR_Gang_PriceTxt"",[(getNumber(missionConfigFile >> 'Life_Settings' >> 'gang_price'))] call life_fnc_numberText]};";
+	onLoad = "[] spawn {waitUntil {!isNull (findDisplay 2520)}; ((findDisplay 2520) displayCtrl 2523) ctrlSetText format[localize ""STR_Gang_PriceTxt"",[(call life_gangPrice)] call life_fnc_numberText]};";
 	
 	class controlsBackground {
 		class Life_RscTitleBackground:Life_RscText {
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
+			colorBackground[] = {0,0.6,0.298,1};
 			idc = -1;
 			x = 0.1;
 			y = 0.2;
@@ -174,7 +175,7 @@ class Life_Create_Gang_Diag {
 			text = "";
 			x = 0.1;
 			y = 0.25;
-			w = 0.5; h = .11;
+			w = 0.5; h = 0.11;
 		};
 		
 		class Title : Life_RscTitle {
@@ -200,7 +201,7 @@ class Life_Create_Gang_Diag {
 		class GangCreateField : Life_RscButtonMenu {
 			idc = -1;
 			text = "$STR_Gang_Create";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+			colorBackground[] = {0,0.6,0.298,0.5};
 			onButtonClick = "[] call life_fnc_createGang";
 			x = 0.27;
 			y = 0.40;

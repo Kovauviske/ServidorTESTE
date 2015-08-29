@@ -1,65 +1,3 @@
-#define ST_LEFT           0x00
-#define ST_MULTI          0x10
-#define GUI_GRID_CENTER_WAbs		((safezoneW / safezoneH) min 1.2)
-#define GUI_GRID_CENTER_HAbs		(GUI_GRID_CENTER_WAbs / 1.2)
-#define GUI_GRID_CENTER_W		(GUI_GRID_CENTER_WAbs / 40)
-#define GUI_GRID_CENTER_H		(GUI_GRID_CENTER_HAbs / 25)
-#define GUI_GRID_CENTER_X		(safezoneX + (safezoneW - GUI_GRID_CENTER_WAbs)/2)
-#define GUI_GRID_CENTER_Y		(safezoneY + (safezoneH - GUI_GRID_CENTER_HAbs)/2)
-
-class Life_Checkbox
-{
-	access = 0; // Control access (0 - ReadAndWrite, 1 - ReadAndCreate, 2 - ReadOnly, 3 - ReadOnlyVerified)
-	idc = -1; // Control identification (without it, the control won't be displayed)
-	type = 77; // Type
-	style = ST_LEFT + ST_MULTI; // Style
-	default = 0; // Control selected by default (only one within a display can be used)
-	blinkingPeriod = 0; // Time in which control will fade out and back in. Use 0 to disable the effect.
-
-	x = 0;
-	y = 0;
-	w = 1 * GUI_GRID_CENTER_W; // Width
-	h = 1 * GUI_GRID_CENTER_H; // Height
-
-	//Colors
-	color[] = { 1, 1, 1, 0.7 }; // Texture color
-	colorFocused[] = { 1, 1, 1, 1 }; // Focused texture color
-	colorHover[] = { 1, 1, 1, 1 }; // Mouse over texture color
-	colorPressed[] = { 1, 1, 1, 1 }; // Mouse pressed texture color
-	colorDisabled[] = { 1, 1, 1, 0.2 }; // Disabled texture color
-
-	//Background colors
-	colorBackground[] = { 0, 0, 0, 0 }; // Fill color
-	colorBackgroundFocused[] = { 0, 0, 0, 0 }; // Focused fill color
-	colorBackgroundHover[] = { 0, 0, 0, 0 }; // Mouse hover fill color
-	colorBackgroundPressed[] = { 0, 0, 0, 0 }; // Mouse pressed fill color
-	colorBackgroundDisabled[] = { 0, 0, 0, 0 }; // Disabled fill color
-
-	//Textures
-	textureChecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";		//Texture of checked CheckBox.
-	textureUnchecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_unchecked_ca.paa";		//Texture of unchecked CheckBox.
-	textureFocusedChecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";	//Texture of checked focused CheckBox (Could be used for showing different texture when focused).
-	textureFocusedUnchecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_unchecked_ca.paa";	//Texture of unchecked focused CheckBox.
-	textureHoverChecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
-	textureHoverUnchecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_unchecked_ca.paa";
-	texturePressedChecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
-	texturePressedUnchecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_unchecked_ca.paa";
-	textureDisabledChecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_checked_ca.paa";
-	textureDisabledUnchecked = "\A3\Ui_f\data\GUI\RscCommon\RscCheckBox\CheckBox_unchecked_ca.paa";
-
-	tooltip = ""; // Tooltip text
-	tooltipColorShade[] = { 0, 0, 0, 1 }; // Tooltip background color
-	tooltipColorText[] = { 1, 1, 1, 1 }; // Tooltip text color
-	tooltipColorBox[] = { 1, 1, 1, 1 }; // Tooltip frame color
-
-	//Sounds
-	soundClick[] = { "\A3\ui_f\data\sound\RscButton\soundClick", 0.09, 1 }; // Sound played after control is activated in format {file, volume, pitch}
-	soundEnter[] = { "\A3\ui_f\data\sound\RscButton\soundEnter", 0.09, 1 }; // Sound played when mouse cursor enters the control
-	soundPush[] = { "\A3\ui_f\data\sound\RscButton\soundPush", 0.09, 1 }; // Sound played when the control is pushed down
-	soundEscape[] = { "\A3\ui_f\data\sound\RscButton\soundEscape", 0.09, 1 }; // Sound played when the control is released after pushing down
-
-};
-
 class Life_RscScrollBar
 {
 	color[] = {1,1,1,0.6};
@@ -136,14 +74,14 @@ class Life_RscListNBox
 	color[] = {0.95,0.95,0.95,1};
 	colorText[] = {1,1,1,1.0};
 	colorDisabled[] = {1,1,1,0.25};
+	colorPicture[] = {1,1,1,1};
+	colorPictureSelected[] = {1,1,1,1};
+	colorPictureDisabled[] = {1,1,1,1};
 	colorScrollbar[] = {0.95,0.95,0.95,1};
 	colorSelect[] = {0,0,0,1};
 	colorSelect2[] = {0,0,0,1};
 	colorSelectBackground[] = {0.8,0.8,0.8,1};
 	colorSelectBackground2[] = {1,1,1,0.5};
-	colorPicture[] = {1,1,1,1};
-	colorPictureSelected[] = {1,1,1,1};
-    	colorPictureDisabled[] = {1,1,1,1};
 	soundSelect[] = {"",0.1,1};
 	soundExpand[] = {"",0.1,1};
 	soundCollapse[] = {"",0.1,1};
@@ -268,8 +206,9 @@ idc = -1;
     w = 0.3;
     sizeEx = 0.040;
     font = "PuristaLight";
-    color[] = {1, 1, 1, 1};
+    color[] = {0, 0, 0, 1};
     colorActive[] = {1, 0.2, 0.2, 1};
+	colorDisabled[] = {0.4,0.4,0.4,1};
     soundEnter[] = {"\A3\ui_f\data\sound\onover", 0.09, 1};
     soundPush[] = {"\A3\ui_f\data\sound\new1", 0.0, 0};
     soundClick[] = {"\A3\ui_f\data\sound\onclick", 0.07, 1};
@@ -293,14 +232,14 @@ class Life_RscButton
 	sizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	colorText[] = {1,1,1,1.0};
 	colorDisabled[] = {0.4,0.4,0.4,1};
-	colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",0.7};
-	colorBackgroundActive[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",1};
+	colorBackground[] = {0,0.6,0.298,0.7};
+	colorBackgroundActive[] = {0,0.6,0.298,1};
 	colorBackgroundDisabled[] = {0.95,0.95,0.95,1};
 	offsetX = 0.003;
 	offsetY = 0.003;
 	offsetPressedX = 0.002;
 	offsetPressedY = 0.002;
-	colorFocused[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",1};
+	colorFocused[] = {0,0.6,0.298,1};
 	colorShadow[] = {0,0,0,1};
 	colorBorder[] = {0,0,0,1};
 	borderSize = 0.0;
@@ -331,8 +270,8 @@ class Life_RscShortcutButton {
 	colorFocused[] = {1,1,1,1.0};
 	color2[] = {0.95,0.95,0.95,1};
 	colorDisabled[] = {1,1,1,0.25};
-	colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",1};
-	colorBackgroundFocused[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",1};
+	colorBackground[] = {0,0.6,0.298,1};
+	colorBackgroundFocused[] = {0,0.6,0.298,1};
 	colorBackground2[] = {1,1,1,1};
 	animTextureDefault = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
 	animTextureNormal = "\A3\ui_f\data\GUI\RscCommon\RscShortcutButton\normal_ca.paa";
@@ -386,6 +325,67 @@ class Life_RscShortcutButton {
 		color = "#E5E5E5";
 		align = "left";
 	};
+};
+
+class Life_RscPhoneButton
+{
+	type = 16;
+	idc = -1;
+	style = 0;
+	default = 0;
+	x = 0;
+	y = 0;
+	w = 0.075;
+	h = 0.075;
+	color[] = {0.543, 0.5742, 0.4102, 1.0};
+	color2[] = {0.95, 0.95, 0.95, 1};
+	colorBackground[] = {1, 1, 1, 1};
+	colorbackground2[] = {1, 1, 1, 1};
+	colorDisabled[] = {1, 1, 1, 0.25};
+	periodFocus = 1.2;
+	periodOver = 0.8;
+
+	class HitZone
+	{
+		left = 0;
+		top = 0;
+		w = 0.075;
+		h = 0.075;
+	};
+
+	class ShortcutPos
+	{
+		left = 0;
+		top = 0;
+		w = 0.075;
+		h = 0.075;
+	};
+
+	class TextPos
+	{
+		left = 0;
+		top = 0;
+		w = 0.075;
+		h = 0.075;
+	};
+
+	textureNoShortcut = "";
+	animTextureNormal = "\ca\ui\data\ui_button_normal_ca.paa";
+	animTextureDisabled = "\ca\ui\data\ui_button_disabled_ca.paa";
+	animTextureOver = "\ca\ui\data\ui_button_over_ca.paa";
+	animTextureFocused = "\ca\ui\data\ui_button_focus_ca.paa";
+	animTexturePressed = "\ca\ui\data\ui_button_down_ca.paa";
+	animTextureDefault = "\ca\ui\data\ui_button_default_ca.paa";
+	period = 0.4;
+	size = 0.03921;
+	sizeEx = 0.03921;
+	text = "";
+	soundEnter[] = {"\ca\ui\data\sound\mouse2", 0.09, 1};
+	soundPush[] = {"\ca\ui\data\sound\new1", 0.09, 1};
+	soundClick[] = {"\ca\ui\data\sound\mouse3", 0.07, 1};
+	soundEscape[] = {"\ca\ui\data\sound\mouse1", 0.09, 1};
+	action = "";
+	toolTip = "";
 };
 
 class Life_RscButtonMenu : Life_RscShortcutButton {
@@ -446,6 +446,20 @@ class Life_RscButtonMenu : Life_RscShortcutButton {
 	soundClick[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundClick",0.09,1};
 	soundEscape[] = {"\A3\ui_f\data\sound\RscButtonMenu\soundEscape",0.09,1};
 	textureNoShortcut = "";
+};
+class Life_RscButtonInvisible : Life_RscButtonMenu {
+	animTextureNormal = "#(argb,8,8,3)color(1,1,1,0)";
+	animTextureDisabled = "#(argb,8,8,3)color(1,1,1,0)";
+	animTextureOver = "#(argb,8,8,3)color(1,1,1,0)";
+	animTextureFocused = "#(argb,8,8,3)color(1,1,1,0)";
+	animTexturePressed = "#(argb,8,8,3)color(1,1,1,0)";
+	animTextureDefault = "#(argb,8,8,3)color(1,1,1,0)";
+	colorBackground[] = {0, 0, 0, 0};
+	colorBackground2[] = {1, 1, 1, 0};
+	color[] = {1, 1, 1, 0};
+	color2[] = {1, 1, 1, 0};
+	colorText[] = {1, 1, 1, 0};
+	colorDisabled[] = {1, 1, 1, 0};
 };
 
 class Life_RscShortcutButtonMain : Life_RscShortcutButton {
@@ -520,7 +534,7 @@ class Life_RscCheckbox {
 	color[] = {0, 0, 0, 0};
 	colorBackground[] = {0, 0, 1, 1};
 	colorTextSelect[] = {0, 0.8, 0, 1};
-	colorSelectedBg[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 1};
+	colorSelectedBg[] = {0,0.6,0.298, 1};
 	colorSelect[] = {0, 0, 0, 1};
 	colorTextDisable[] = {0.4, 0.4, 0.4, 1};
 	colorDisable[] = {0.4, 0.4, 0.4, 1};
@@ -544,7 +558,7 @@ class Life_RscProgress
 	shadow = 2;
 	colorFrame[] = {0, 0, 0, 1};
 	colorBackground[] = {0,0,0,0.7};
-	colorBar[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
+	colorBar[] = {0,0.6,0.298, "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
 };
 
 class Life_RscListBox 
@@ -590,6 +604,49 @@ class Life_RscListBox
 	};
 };
 
+class Life_RscListBox2 
+{
+	style = 16;
+	idc = -1;
+	type = 5;
+	w = 0.275;
+	h = 0.04;
+	font = "PuristaMedium";
+	colorSelect[] = {1, 1, 1, 1};
+	colorText[] = {0, 0, 0, 1};
+	colorBackground[] = {0.28,0.28,0.28,0.28};
+	colorSelect2[] = {1, 1, 1, 1};
+	colorSelectBackground[] = {0.95, 0.95, 0.95, 0.5};
+	colorSelectBackground2[] = {1, 1, 1, 0.5};
+	colorScrollbar[] = {0.2, 0.2, 0.2, 1};
+	colorPicture[] = {1,1,1,1};
+	colorPictureSelected[] = {1,1,1,1};
+	colorPictureDisabled[] = {1,1,1,1};
+	arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa";
+	arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa";
+	wholeHeight = 0.45;
+	rowHeight = 0.04;
+	color[] = {0.7, 0.7, 0.7, 1};
+	colorActive[] = {0,0,0,1};
+	colorDisabled[] = {0,0,0,0.3};
+	sizeEx = 0.023;
+	soundSelect[] = {"",0.1,1};
+	soundExpand[] = {"",0.1,1};
+	soundCollapse[] = {"",0.1,1};
+	maxHistoryDelay = 1;
+	autoScrollSpeed = -1;
+	autoScrollDelay = 5;
+	autoScrollRewind = 0;
+	tooltipColorText[] = {1,1,1,1};
+	tooltipColorBox[] = {1,1,1,1};
+	tooltipColorShade[] = {0,0,0,0.65};
+	class ListScrollBar: Life_RscScrollBar
+	{
+		color[] = {1,1,1,1};
+		autoScrollEnabled = 1;
+	};
+};
+
 class Life_RscEdit {
 	type = 2;
 	style = 0x00 + 0x40;
@@ -602,7 +659,7 @@ class Life_RscEdit {
 	colorText[] = {0.95, 0.95, 0.95, 1};
 	colorDisabled[] = {1, 1, 1, 0.25};
 	autocomplete = false;
-	colorSelection[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 1};
+	colorSelection[] = {0,0.6,0.298, 1};
 	canModify = 1;
 };
 
@@ -801,7 +858,7 @@ class Life_RscMapControl
 		colorCanceled[] = {0.7,0.7,0.7,1};
 		colorDone[] = {0.7,1,0.3,1};
 		colorFailed[] = {1,0.3,0.2,1};
-		color[] = {"(profilenamespace getvariable ['IGUI_TEXT_RGB_R',0])","(profilenamespace getvariable ['IGUI_TEXT_RGB_G',1])","(profilenamespace getvariable ['IGUI_TEXT_RGB_B',1])","(profilenamespace getvariable ['IGUI_TEXT_RGB_A',0.8])"};
+		color[] = {0,0.6,0.298,1};
 		icon = "\A3\ui_f\data\map\mapcontrol\taskIcon_CA.paa";
 		iconCreated = "\A3\ui_f\data\map\mapcontrol\taskIconCreated_CA.paa";
 		iconCanceled = "\A3\ui_f\data\map\mapcontrol\taskIconCanceled_CA.paa";
@@ -1149,7 +1206,7 @@ class Life_RscToolbox {
 	colorSelect[] = {0.95, 0.95, 0.95, 1};
 	colorTextDisable[] = {0.4, 0.4, 0.4, 1};
 	colorDisable[] = {0.4, 0.4, 0.4, 1};
-	colorSelectedBg[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", 0.5};
+	colorSelectedBg[] = {0,0.6,0.298, 0.5};
 	font = "PuristaMedium";
 	sizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8)";
 };

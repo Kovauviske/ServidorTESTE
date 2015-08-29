@@ -10,7 +10,7 @@ class Life_impound_menu
 	{
 		class Life_RscTitleBackground : Life_RscText
 		{
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
+			colorBackground[] = {0,0.6,0.298};
 			idc = -1;
 			x = 0.1;
 			y = 0.2;
@@ -42,7 +42,7 @@ class Life_impound_menu
 		{
 			idc = -1;
 			text = "$STR_GUI_YourVeh";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
+			colorBackground[] = {0,0.6,0.298};
 			x = 0.11; y = 0.26;
 			w = 0.3;
 			h = (1 / 25);
@@ -52,7 +52,7 @@ class Life_impound_menu
 		{
 			idc = 2830;
 			text = "$STR_GUI_VehInfo";
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
+			colorBackground[] = {0,0.6,0.298};
 			x = 0.42; y = 0.26;
 			w = 0.46;
 			h = (1 / 25);
@@ -67,6 +67,8 @@ class Life_impound_menu
 			y = 0.9 - (1 / 25);
 			w = (6.25 / 40);
 			h = (1 / 25);
+			colorText[] = {1,1,1,1};
+		    colorBackground[] = {0,0,0,0.8};
 		};
 		
 		class RentCar : Life_RscButtonMenu
@@ -78,6 +80,8 @@ class Life_impound_menu
 			y = 0.9 - (1 / 25);
 			w = (6.25 / 40);
 			h = (1 / 25);
+			colorText[] = {1,1,1,1};
+		    colorBackground[] = { 0, 0.47, 0.69, 1 };
 		};
 		
 		class BuyCar : life_RscButtonMenu 
@@ -89,6 +93,21 @@ class Life_impound_menu
 			y = 0.9 - (1 / 25);
 			w = (6.25 / 40);
 			h = (1 / 25);
+			colorText[] = {1,1,1,1};
+		    colorBackground[] = { 0.68, 0, 0, 1 };
+		};
+		
+		class InsureCar : life_RscButtonMenu
+		{
+			idc = 97480;
+			text = "Assurer";
+			onButtonClick = "[] call life_fnc_InsureCar;";
+			x = 0.43 + (6.25 / 40) + (1 / 250 / (safezoneW / safezoneH));
+			y = 0.9 - (1 / 25);
+			w = (6.25 / 40);
+			h = (1 / 25);
+			colorText[] = {1,1,1,1};
+		    colorBackground[] = { 0.24, 0.41, 0.15, 1 };
 		};
 	};
 	
@@ -130,7 +149,7 @@ class Life_impound_menu
 		class MainHideText : Life_RscText
 		{
 			idc = 2811;
-			text = "$STR_ANOTF_QueryGarage";
+			text = "En attente de la base données...";
 			sizeEx = 0.06;
 			x = 0.24; y = 0.5;
 			w = 0.6;

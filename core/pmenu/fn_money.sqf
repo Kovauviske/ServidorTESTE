@@ -1,0 +1,32 @@
+/*
+	File: fn_money.sqf
+	Author: John "Paratus" VanderZwet
+	
+	Description:
+	View and trade money dialog
+*/
+private["_dialog","_inv","_lic","_licenses","_near","_near_units","_mstatus","_shrt","_side"];
+
+disableSerialization;
+waitUntil {!isNull findDisplay 2001};
+
+[] call life_fnc_p_updateMenu;
+
+_display = findDisplay 2001;
+_near = _display displayCtrl 2022;
+_mstatus = _display displayCtrl 2015;
+
+_side = switch(playerSide) do {case west:{"cop"}; case civilian:{"civ"}; case independent:{"med"};};
+
+//Near players
+_near_units = [];
+{ if(player distance _x < 10) then {_near_units set [count _near_units,_x];};} foreach playableUnits;
+{
+	if(!isNull _x && alive _x && player distance _x < 10 && _x != player) then
+	{
+		_near lbAdd format["%1 - %2",name _x, side _x];
+		_near lbSetData [(lbSize _near)-1,str(_x)];
+	};
+} foreach _near_units;
+
+_mstatus ctrlSetStructuredText parseText format["<t align='center'><img size='2.5' image='icons\bank.paa'/><br/><t size='2px'>$%1</t><br/><img size='2.5' image='icons\money.paa'/><br/><t size='2'>$%2</t></t>",[life_atmcash] call life_fnc_numberText,[life_cash] call life_fnc_numberText];

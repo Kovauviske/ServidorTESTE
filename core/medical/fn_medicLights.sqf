@@ -10,7 +10,7 @@ Private ["_vehicle","_lightRed","_lightBlue","_lightleft","_lightright","_leftRe
 _vehicle = _this select 0;
 	
 if(isNil "_vehicle" OR isNull _vehicle OR !(_vehicle getVariable "lights")) exitWith {};
-_lightRed = [20, 0.1, 0.1];
+_lightRed = [0.1, 0.1, 20];
 _lightBlue = [0.1, 0.1, 20];
 
 _lightleft = "#lightpoint" createVehicle getpos _vehicle;   
@@ -21,23 +21,23 @@ _lightleft setLightAmbient [0.1,0.1,1];
 
 switch (typeOf _vehicle) do
 {
+	case "C_SUV_01_F":
+	{
+		_lightleft lightAttachObject [_vehicle, [-0.4, 2.3, -0.55]];
+	};
+	
+	case "O_Truck_02_medical_F":
+	{
+		_lightleft lightAttachObject [_vehicle, [-0.6, 2, -0.95]];
+	};
+	
+	case "C_Van_01_box_F":
+	{
+		_lightleft lightAttachObject [_vehicle, [-0.38, 2.22, -0.50]];
+	};
 	case "C_Offroad_01_F":
 	{
 		_lightleft lightAttachObject [_vehicle, [-0.37, 0.0, 0.56]];
-	};
-	
-	case "B_MRAP_01_F":
-	{
-		_lightleft lightAttachObject [_vehicle, [-0.37, -1.9, 0.7]];
-	};
-	
-	case "C_SUV_01_F":
-	{
-		_lightleft lightAttachObject [_vehicle, [-0.37,-1.2,0.42]];
-	};
-	case "C_Hatchback_01_sport_F":
-	{
-		_lightleft lightAttachObject [_vehicle, [-0.37,-1.2,0.42]];
 	};
 };
 
@@ -55,23 +55,22 @@ _lightright setLightAmbient [0.1,0.1,1];
 
 switch (typeOf _vehicle) do
 {
+	case "O_Truck_02_medical_F":
+	{
+		_lightright lightAttachObject [_vehicle, [0.65, 2, -0.95]];
+	};
+
+	case "C_SUV_01_F":
+	{
+		_lightright lightAttachObject [_vehicle, [0.4, 2.3, -0.52]];
+	};
+	case "C_Van_01_box_F":
+	{
+		_lightright lightAttachObject [_vehicle, [0.38, 2.22, -0.50]];
+	};
 	case "C_Offroad_01_F":
 	{
 		_lightright lightAttachObject [_vehicle, [0.37, 0.0, 0.56]];
-	};
-	
-	case "B_MRAP_01_F":
-	{
-		_lightright lightAttachObject [_vehicle, [0.37, -1.9, 0.7]];
-	};
-	
-	case "C_SUV_01_F":
-	{
-		_lightright lightAttachObject [_vehicle, [0.37,-1.2,0.42]];
-	};
-	case "C_Hatchback_01_sport_F":
-	{
-		_lightleft lightAttachObject [_vehicle, [-0.37,-1.2,0.42]];
 	};
 };
   

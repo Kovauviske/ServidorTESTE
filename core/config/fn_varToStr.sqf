@@ -52,8 +52,6 @@ switch (_var) do
 	case "life_inv_peach": {(localize "STR_Item_Peach")};
 	case "life_inv_coke": {(localize "STR_Item_CocaineU")};
 	case "life_inv_cokep": {(localize "STR_Item_CocaineP")};
-	case "life_inv_methu": {(localize "STR_Item_MethU")};
-	case "life_inv_methp": {(localize "STR_Item_MethP")};
 	case "life_inv_spikeStrip": {(localize "STR_Item_SpikeStrip")};
 	case "life_inv_rock": {(localize "STR_Item_Rock")};
 	case "life_inv_cement": {(localize "STR_Item_CementBag")};
@@ -63,8 +61,12 @@ switch (_var) do
 	case "life_inv_defusekit": {(localize "STR_Item_DefuseKit")};
 	case "life_inv_storagesmall": {(localize "STR_Item_StorageBS")};
 	case "life_inv_storagebig": {(localize "STR_Item_StorageBL")};
-	case "life_inv_handcuffs": {(localize "STR_Item_Handcuffs")};
-    case "life_inv_handcuffkeys": {(localize "STR_Item_Handcuffkeys")};
+	//New Resto
+	case "life_inv_toasty": {"Grill-Cheese"};
+	case "life_inv_sandwich": {"Sandwich"};
+	case "life_inv_redBurger": {"Red Burger"};
+	case "life_inv_soda": {"Liberty Soda"};
+	case "life_inv_beer": {"Pichet de Biere"};
 	
 	//License Block
 	case "license_civ_driver": {(localize "STR_License_Driver")};
@@ -76,7 +78,6 @@ switch (_var) do
 	case "license_civ_gun": {(localize "STR_License_Firearm")};
 	case "license_cop_air": {(localize "STR_License_Pilot")};
 	case "license_cop_swat": {(localize "STR_License_Swat")};
-	case "license_cop_donator": {(localize "STR_License_Donator_cop")};
 	case "license_cop_cg": {(localize "STR_License_CG")};
 	case "license_civ_rebel": {(localize "STR_License_Rebel")};
 	case "license_civ_truck": {(localize "STR_License_Truck")};
@@ -86,7 +87,6 @@ switch (_var) do
 	case "license_civ_sand": {(localize "STR_License_Sand")};
 	case "license_civ_salt": {(localize "STR_License_Salt")};
 	case "license_civ_coke": {(localize "STR_License_Cocaine")};
-	case "license_civ_meth": {(localize "STR_License_Meth")};
 	case "license_civ_marijuana": {(localize "STR_License_Marijuana")};
 	case "license_civ_cement": {(localize "STR_License_Cement")};
 	case "license_med_air": {(localize "STR_License_Pilot")};

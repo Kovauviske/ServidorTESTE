@@ -6,7 +6,7 @@
 	Description: Enables God mode for Admin
 */
 
-if(FETCH_CONST(life_adminlevel) < 3) exitWith {closeDialog 0; hint localize "STR_ANOTF_ErrorLevel";};
+if(__GETC__(life_adminlevel) < 3) exitWith {closeDialog 0; hint localize "STR_ANOTF_ErrorLevel";};
 
 [] spawn {
   while {dialog} do {
@@ -17,10 +17,10 @@ if(FETCH_CONST(life_adminlevel) < 3) exitWith {closeDialog 0; hint localize "STR
  
 if(life_god) then {
 	life_god = false;
-	titleText ["God mode disabled","PLAIN"]; titleFadeOut 2;
+	titleText ["God mode désactivé","PLAIN"]; titleFadeOut 2;
 	player allowDamage true;
 } else {
 	life_god = true;
-	titleText ["God mode enabled","PLAIN"]; titleFadeOut 2;
+	titleText ["God mode activé","PLAIN"]; titleFadeOut 2;
 	player allowDamage false;
 };

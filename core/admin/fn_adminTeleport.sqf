@@ -1,12 +1,12 @@
 #include <macro.h>
 /*
 	File: fn_adminTeleport.sqf
-	Author: ColinM9991
+	Author: _Fuzz
 	Credits: To original script author(s)
 	Description:
 	Teleport to chosen position.
 */
-if(FETCH_CONST(life_adminlevel) == 0) exitWith {closeDialog 0;};
+if(__GETC__(life_adminlevel) == 0) exitWith {closeDialog 0;};
 
 [] spawn {
   while {dialog} do {
@@ -20,7 +20,7 @@ tele={
 	(vehicle player) setpos [_pos select 0, _pos select 1, 0];
 	onMapSingleClick "";
 	openMap [false, false];
-	hint "You have teleported to your selected position";
+	hint "Vous avez téléporter sur la position sélectionner";
 };
 openMap [true, false];
 onMapSingleClick "[_pos select 0, _pos select 1, _pos select 2] call tele";

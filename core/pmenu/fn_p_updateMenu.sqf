@@ -1,71 +1,44 @@
 #include <macro.h>
 /*
 	File: fn_p_updateMenu.sqf
-	Author: Bryan "Tonic" Boardwine
+	Author: [LLD] Team
 	
 	Description:
 	Updates the player menu (Virtual Interaction Menu)
 */
-private["_inv","_lic","_licenses","_near","_near_units","_mstatus","_shrt","_side","_struct"];
+private["_dialog","_time","_left","_right","_inv","_lic","_licenses","_near","_near_units","_mstatus","_shrt","_side","_talents"];
 disableSerialization;
 
-if(FETCH_CONST(life_adminlevel) < 1) then {
-	ctrlShow[2020,false];
-	ctrlShow[2021,false];
+_dialog = findDisplay 3000; // Messaging
+if (isNull _dialog) then { _dialog = findDisplay 2001; }; // Inventory / Money / Licenses
+if (isNull _dialog) then { _dialog = findDisplay 2700; }; // Key chain
+if (isNull _dialog) then { _dialog = findDisplay 2900; }; // Settings
+if (isNull _dialog) then { _dialog = findDisplay 90000; }; // Home screen
+_time = _dialog displayCtrl 90035;
+_left = _dialog displayCtrl 90036;
+_right = _dialog displayCtrl 90037;
+
+// Statusbar text
+_hour = date select 3;
+_min = date select 4;
+if (_hour < 10) then { _hour = format["0%1", _hour]; };
+if (_min < 10) then { _min = format["0%1", _min]; };
+_DoG = " <t color='#01B0F0'>Linox</t>";
+_time ctrlSetStructuredText parseText format["<t align='center' shadow='0' size='0.75'>%1:%2</t>", _hour, _min];
+_cashNum = 0;
+_cashText = "";
+if(life_cash > 5000000) then 
+{
+	_cashNum = round(life_cash / 1000000);
+	_cashText = format["%1M", _cashNum];
+} else {
+	if(life_cash > 500000) then 
+	{
+		_cashNum = round(life_cash / 1000);
+	_cashText = format["%1K", _cashNum];
+	} else {
+		_cashText = format["%1", [life_cash] call life_fnc_numberText];
+	};
 };
-
-_side = switch(playerSide) do {case west:{"cop"}; case civilian:{"civ"}; case independent:{"med"};};
-
-_inv = CONTROL(2001,2005);
-_lic = CONTROL(2001,2014);
-_near = CONTROL(2001,2022);
-_near_i = CONTROL(2001,2023);
-_mstatus = CONTROL(2001,2015);
-_struct = "";
-lbClear _inv;
-lbClear _near;
-lbClear _near_i;
-
-//Near players
-_near_units = [];
-{ if(player distance _x < 10) then {_near_units pushBack _x};} foreach playableUnits;
-{
-	if(!isNull _x && alive _x && player distance _x < 10 && _x != player) then {
-		_near lbAdd format["%1 - %2",_x GVAR ["realname",name _x], side _x];
-		_near lbSetData [(lbSize _near)-1,str(_x)];
-		_near_i lbAdd format["%1 - %2",_x GVAR ["realname",name _x], side _x];
-		_near_i lbSetData [(lbSize _near)-1,str(_x)];
-	};
-} foreach _near_units;
-
-_mstatus ctrlSetStructuredText parseText format["<img size='1.3' image='icons\bank.paa'/> <t size='0.8px'>$%1</t><br/><img size='1.2' image='icons\money.paa'/> <t size='0.8'>$%2</t>",[BANK] call life_fnc_numberText,[CASH] call life_fnc_numberText];
-ctrlSetText[2009,format["Weight: %1 / %2", life_carryWeight, life_maxWeight]];
-
-{
-	if(ITEM_VALUE(configName _x) > 0) then {
-		_inv lbAdd format["%2 [x%1]",ITEM_VALUE(configName _x),localize (getText(_x >> "displayName"))];
-		_inv lbSetData [(lbSize _inv)-1,configName _x];
-		_icon = M_CONFIG(getText,"VirtualItems",configName _x,"icon");
-		if(!(EQUAL(_icon,""))) then {
-			_inv lbSetPicture [(lbSize _inv)-1,_icon];
-		};
-	};
-} foreach ("true" configClasses (missionConfigFile >> "VirtualItems"));
-
-{
-	_displayName = getText(_x >> "displayName");
-	
-	if(LICENSE_VALUE(configName _x,_side)) then {
-		_struct = _struct + format["%1<br/>",localize _displayName];
-	};
-} foreach (format["getText(_x >> 'side') isEqualTo '%1'",_side] configClasses (missionConfigFile >> "Licenses"));
-
-if(EQUAL(_struct,"")) then {
-	_struct = "No Licenses";
-};
-
-_lic ctrlSetStructuredText parseText format["
-<t size='0.8px'>
-%1
-</t>
-",_struct];
+_left ctrlSetStructuredText parseText format["<t shadow='0' size='0.75'>$%1%2</t>", _cashText, _DoG];
+_right ctrlSetStructuredText parseText format["<t shadow='0' size='0.75'>%1/%2</t>", life_carryWeight, life_maxWeight];

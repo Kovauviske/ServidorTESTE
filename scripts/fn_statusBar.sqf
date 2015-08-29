@@ -1,15 +1,9 @@
+#include <macro.h>
+
 waitUntil {!(isNull (findDisplay 46))};
 disableSerialization;
-/*
-	File: fn_statusBar.sqf
-	Author: Some French Guy named Osef I presume, given the variable on the status bar
-	Edited by: [midgetgrimm]
-	Description: Puts a small bar in the bottom right of screen to display in-game information
 
-*/
-_rscLayer = "osefStatusBar" call BIS_fnc_rscLayer;
-_rscLayer cutRsc["osefStatusBar","PLAIN"];
-systemChat format[" ATB - Carregando informações do jogo...", _rscLayer];
+4 cutRsc ["osefStatusBar","PLAIN"]; 
 
 [] spawn {
 	sleep 5;
@@ -17,11 +11,9 @@ systemChat format[" ATB - Carregando informações do jogo...", _rscLayer];
 	_timeSinceLastUpdate = 0;
 	while {true} do
 	{
-		sleep 1;
-		_uptime = [time,"HH:MM:SS"] call BIS_fnc_secondsToString;
+		sleep 10;
 		_counter = _counter - 1;
-		((uiNamespace getVariable "osefStatusBar")displayCtrl 1000)ctrlSetText format["FPS: %1 | UpTime: %2 | Policiais: %3 | SAMU: %4 | Civis: %5 | Dinheiro: %6 | Banco: %7 | Posição: %8", round diag_fps, _uptime, west countSide playableUnits, independent countSide playableUnits, civilian countSide playableUnits, [life_cash] call life_fnc_numberText, [life_atmbank] call life_fnc_numberText, mapGridPosition player, _counter]; 
+		((uiNamespace getVariable "osefStatusBar")displayCtrl 1000)ctrlSetStructuredText
+    parseText format["<t color='#0cc40c'>www.linox.org</t> | <t color='#0cc40c'>FPS: %1</t> | <t color='#0d4bc8'>Police: %2</t> | <t color='#a03586'>Civs: %3</t> | <t color='#db0d0d'>Medic: %4</t> | <t color='#818181'>ARGENT: %5</t> | <t color='#818181'>BANQUE: %6</t> | <t color='#0cc40c'>TS: linoxtrinity.ts3serv.com:10042</t>", round diag_fps, west countSide playableUnits, civilian countSide playableUnits, independent countSide playableUnits,[life_cash] call life_fnc_numberText,[life_atmcash] call life_fnc_numberText,mapGridPosition player];
 	}; 
 };
-
-

@@ -44,6 +44,7 @@ if(count life_spawn_point == 0) then
 					player setPos (getMarkerPos (life_spawn_point select 0));
 				};
 				
+				{_bPos = _bPos - [(_house buildingPos _x)];} foreach (_house getVariable ["slots",[]]);
 				_pos = _bPos call BIS_fnc_selectRandom;
 				player setPosATL _pos;
 			} else {
@@ -59,14 +60,13 @@ if(count life_spawn_point == 0) then
 	{
 		player setPos (getMarkerPos (life_spawn_point select 0));
 	};
+	if(life_firstSpawn) then {
+		life_firstSpawn = false;
+		_script = [] spawn life_fnc_welcomeNotification;
+		waitUntil {scriptDone _script};
+	} else {
+		cutText ["","BLACK IN"];
+	};
 	titleText[format["%2 %1",life_spawn_point select 1,localize "STR_Spawn_Spawned"],"BLACK IN"];
-};
-
-//Introcam
-[] spawn life_fnc_IntroCam;
-
-if(life_firstSpawn) then {
-	life_firstSpawn = false;
-	[] call life_fnc_welcomeNotification;
 };
 [] call life_fnc_hudSetup;

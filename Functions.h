@@ -26,8 +26,6 @@ class Life_Client_Core
 		class initCop {};
 		class initMedic {};
 		class welcomeNotification {};
-		class survival {};
-		class initZeus {};
 	};
 	
 	class Admin
@@ -63,9 +61,6 @@ class Life_Client_Core
 		class medicLoadout {};
 		class medicSirenLights {};
 		class medicLights {};
-		class medicSiren {};
-		class medEnter {};
-		class medrestrain {};
 	};
 	
 	class Actions
@@ -98,15 +93,20 @@ class Life_Client_Core
 		class ticketAction {};
 		class packupSpikes {};
 		class storeVehicle {};
-		class robShops {};
 		class robAction {};
 		class captureHideout {};
 		class gather {};
-		class gutAnimal {};
+		// Heal
+		class heal {};
+		// Surrender
 		class surrender {};
-		class gatherMeth {};
-		class removeWeaponAction {};
-		class skyDive {};
+		//Test de Drug
+		class drugtestAction {};
+		class extinguishJoint {};
+		//Playsound
+		class playSound {};
+		// Voler Dep
+		class robShops {};
 	};
 	
 	class Housing
@@ -124,16 +124,36 @@ class Life_Client_Core
 		class lockupHouse {};
 		class copHouseOwner {};
 		class lockHouse {};
-		class garageRefund {};
 	};
 	
 	class Config
 	{
 		file = "core\config";
+		class licensePrice {};
+		class vehicleColorCfg {};
+		class vehicleColorStr {};
+		class vehicleListCfg {};
+		class licenseType {};
+		class eatFood {};
+		class varHandle {};
+		class varToStr {};
+		class impoundPrice {};
 		class itemWeight {};
 		class taxRate {};
+		class virt_shops {};
+		class vehShopLicenses {};
 		class vehicleAnimate {};
+		class weaponShopCfg {};
 		class vehicleWeightCfg {};
+		class houseConfig {};
+		
+		//Clothing Store Configs
+		class clothing_cop {};
+		class clothing_bruce {};
+		class clothing_reb {};
+		class clothing_dive {};
+		class clothing_kart {};
+		class clothing_med {};
 	};
 
 	class Player_Menu
@@ -142,7 +162,6 @@ class Life_Client_Core
 		class wantedList {};
 		class wantedInfo {};
 		class wantedMenu {};
-		class wantedAddP {};
 		class pardon {};
 		class giveItem {};
 		class giveMoney {};
@@ -157,8 +176,15 @@ class Life_Client_Core
 		class s_onSliderChange {};
 		class updateViewDistance {};
 		class settingsMenu {};
-		class s_onChar {};
-		class s_onCheckedChange {};
+		class settingsInit {};
+		// New cell_phone
+		class cellphone2 {};
+		//SmartPhone
+		class inventory {};
+		class money {};
+		class licenses {};
+		class wantedadd2 {};
+		class wanted2 {};
 	};
 	
 	class Functions
@@ -203,9 +229,17 @@ class Life_Client_Core
 		class saveGear {};
 		class loadGear {};
 		class stripDownPlayer {};
-		class nearATM {};
-		class fadeSound {};
-		class seizeObjects {};
+		//Random
+		class randomRound {};
+		class random {};
+		//Empty Fuel
+		class emptyFuel {};
+		// Show Progress
+		class showProgress {};
+		//BipBIP Arriere Camion
+		class BipBipCamion {};
+		//abort
+		class abortAction {};
 	};
 	
 	class Network
@@ -214,6 +248,7 @@ class Life_Client_Core
 		class broadcast {};
 		class MP {};
 		class MPexec {};
+		class netSetVar {};
 		class corpse {};
 		class jumpFnc {};
 		class soundDevice {};
@@ -236,9 +271,6 @@ class Life_Client_Core
 		class demoChargeTimer {};
 		class civLoadout {};
 		class freezePlayer {};
-		class removeWeapons {};
-		class civInteractionMenu {};
-		class civRestrain {};
 	};
 	
 	class Vehicle
@@ -255,8 +287,6 @@ class Life_Client_Core
 		class vehicleWeight {};
 		class deviceMine {};
 		class addVehicle2Chain {};
-		class civVInteractionMenu {};
-        class medVInteractionMenu {};
 	};
 	
 	class Cop
@@ -272,7 +302,6 @@ class Life_Client_Core
 		class ticketGive {};
 		class ticketPay {};
 		class ticketPrompt {};
-		class copSiren {};
 		class spikeStripEffect {};
 		class radar {};
 		class questionDealer {};
@@ -285,10 +314,14 @@ class Life_Client_Core
 		class fedCamDisplay {};
 		class copLoadout {};
 		class ticketPaid {};
-		class wantedGrab {};
-		class copEnter {};
+		//Uniform
+		class updateClothing {};
+		class playSiren {};
+		//Jail time
+		class showArrestDialog {};
+		class arrestDialog_Arrest {};
+		// enlever objets a terre
 		class seizeObjects {};
-		class copOpener {};
 	};
 	
 	class Gangs
@@ -306,6 +339,21 @@ class Life_Client_Core
 		class gangInvite {};
 		class gangDisband {};
 		class gangDisbanded {};
+		
+		class gangSelect {};
+		class gangMarkers {};
+		
+		//OLD GANG
+		class createGangOld {};
+		class gangBrowser {};
+		class gangManagement {};
+		class gangMenuOld {};
+		class joinGang {};
+		class kickGang {};
+		class leaveGang {};
+		class setGangLeader {};
+		class lockGang {};
+		class unlockGang {};
 	};
 	
 	class Shops
@@ -344,9 +392,14 @@ class Life_Client_Core
 		class blastingCharge {};
 		class defuseKit {};
 		class storageBox {};
-	    class weed {};
+		//Dug effect
+		class useHeroin {};
+		class useKokain {};
+		class useKokain2{};
+		class useMarihuana {};
+		class weedSmoke {};
+		//Car Alarm
 		class CarAlarmSound {};
-		class pLockpick {};
 	};
 	
 	class Dialog_Controls
@@ -372,23 +425,71 @@ class Life_Client_Core
 		class safeFix {};
 		class vehicleGarage {};
 		class gangDeposit {};
-		class wireTransfer {};
+		// Custom own garage for Linox
+		class vehicleGarage2 {};
+		class unimpound2 {};
+		class garageLBChange2 {};
+		class vehicleGarage3 {};
+		class unimpound3 {};
+		class garageLBChange3 {};
+		class vehicleGarage4 {};
+		class unimpound4 {};
+		class garageLBChange4 {};
+		// Assurance
+		class InsureCar {};
+		class InsureCar2 {};
+		class InsureCar3 {};
+		//Sell POPO et medic
+		class sellGarage2 {};
+		class sellGarage3 {};
+	};
+	
+	class Scripts
+	{
+		file = "Scripts";
+		class earplugInit {};
+		class statusBar {};
+	};
+	
+	class Market
+	{
+		file = "core\market";
+		
+		class openMarketView;
+		class refreshMarketView;
+		class marketShortView;
+		class marketBuy;
+		class marketSell;
+		class marketGetBuyPrice;
+		class marketGetSellPrice;
+		class marketconfiguration;
+		class marketReset;
+		class marketChange;
+		class marketGetRow;
+		class marketGetPriceRow;
+		class marketSetPriceRow;
 	};
 	
 	class CopPlaceables
 	{
-		file = "core\cop\placeables";
+		file = "core\cop\roadblock";
 		class placeablesInit {};
 		class placeablesMenu {};
 		class placeablesRemoveAll {};
 		class placeablePlace {};
 		class placeableCancel {};
 		class placeablesPlaceComplete {};
+		class facinit {};
 	};
 	
-	class Cam
+	class CopPlaceablesMEDIC
 	{
-	   file ="core";
-	   class IntroCam {};
+		file = "core\medical\MedicPlaceables";
+		class placeablesInitMEDIC {};
+		class placeablesMenuMEDIC {};
+		class placeablesRemoveAllMEDIC {};
+		class placeablePlaceMEDIC {};
+		class placeableCancelMEDIC {};
+		class placeablesPlaceCompleteMEDIC {};
 	};
 };

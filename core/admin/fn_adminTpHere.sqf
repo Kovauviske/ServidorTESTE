@@ -1,12 +1,12 @@
-#include <macro.h>
+﻿#include <macro.h>
 /*
 	File: fn_adminTpHere.sqf
-	Author: ColinM9991
+	Author: _Fuzz
 	
 	Description:
 	Teleport selected player to you.
 */
-if(FETCH_CONST(life_adminlevel) == 0) exitWith {closeDialog 0;};
+if(__GETC__(life_adminlevel) == 0) exitWith {closeDialog 0;};
 
 private["_target"];
 _target = lbData[2902,lbCurSel (2902)];
@@ -16,4 +16,4 @@ if(isNull _target) exitWith {};
 if(_unit == player) exitWith {hint localize "STR_ANOTF_Error";};
 
 _target setPos (getPos player);
-hint format["You have teleported %1 to your location",_target getVariable["realname",name _target]];
+hint format["Vous avez téléporter %1 sur vous",_target getVariable["realname",name _target]];

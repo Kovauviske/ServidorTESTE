@@ -13,3 +13,5 @@ hint localize "STR_GNOTF_DisbandWarn_2";
 if(count units _group == 0) then {
 	deleteGroup _group;
 };
+
+closedialog 0;

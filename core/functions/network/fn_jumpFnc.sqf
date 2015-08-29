@@ -11,7 +11,7 @@ _run = [_this,1,true,[false]] call BIS_fnc_param;
 if(isNull _unit) exitWith {}; //Bad data
 if(local _unit && !_run) exitWith {}; //Ahh
 
-if(animationState _unit == "amovpercmsprsnonwnondf_amovppnemstpsnonwnondnon") exitWith {};
+if(animationState _unit == "AovrPercMrunSrasWrflDf") exitWith {};
 _velocity = velocity _unit;
 
 if(local _unit) then {

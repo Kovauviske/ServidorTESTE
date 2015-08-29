@@ -56,8 +56,6 @@ switch (_mode) do
 			case "diamondc": {"life_inv_diamondr"};
 			case "cocaine": {"life_inv_coke"};
 			case "cocainep": {"life_inv_cokep"};
-			case "methu": {"life_inv_methu"};
-			case "methp": {"life_inv_methp"};
 			case "spikeStrip": {"life_inv_spikeStrip"};
 			case "cement": {"life_inv_cement"};
 			case "rock": {"life_inv_rock"};
@@ -67,8 +65,12 @@ switch (_mode) do
 			case "defusekit": {"life_inv_defusekit"};
 			case "storagesmall": {"life_inv_storagesmall"};
 			case "storagebig": {"life_inv_storagebig"};
-			case "handcuffs": {"life_inv_handcuffs"};
-            case "handcuffkeys": {"life_inv_handcuffkeys"};
+			//New Resto
+			case "soda": {"life_inv_soda"};
+			case "beer": {"life_inv_beer"};
+			case "toasty": {"life_inv_toasty"};
+			case "sandwich": {"life_inv_sandwich"};
+			case "redburger": {"life_inv_redBurger"};
 		};
 	};
 	
@@ -116,8 +118,6 @@ switch (_mode) do
 			case "life_inv_saltr": {"salt_r"};
 			case "life_inv_coke": {"cocaine"};
 			case "life_inv_cokep": {"cocainep"};
-			case "life_inv_methu": {"methu"};
-			case "life_inv_methp": {"methp"};
 			case "life_inv_spikeStrip": {"spikeStrip"};
 			case "life_inv_cement": {"cement"};
 			case "life_inv_rock": {"rock"};
@@ -127,8 +127,12 @@ switch (_mode) do
 			case "life_inv_defusekit": {"defusekit"};
 			case "life_inv_storagesmall": {"storagesmall"};
 			case "life_inv_storagebig": {"storagebig"};
-		    case "life_inv_handcuffs": {"handcuffs"};
-            case "life_inv_handcuffkeys": {"handcuffkeys"};
+			//New Resto
+			case "life_inv_redBurger": {"redburger"};
+			case "life_inv_toasty": {"toasty"};
+			case "life_inv_sandwich": {"sandwich"};
+			case "life_inv_beer": {"beer"};
+			case "life_inv_soda": {"soda"};
 		};
 	};
 };

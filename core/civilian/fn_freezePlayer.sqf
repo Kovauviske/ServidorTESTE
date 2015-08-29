@@ -1,7 +1,7 @@
 #include <macro.h>
 /*
 	File: fn_freezePlayer.sqf
-	Author: ColinM9991
+	Author: _Fuzz
  
 	Description: Freezes selected player
 */

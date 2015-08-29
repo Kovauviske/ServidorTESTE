@@ -1,16 +1,16 @@
 #include <macro.h>
 /*
 	File: fn_adminCompensate.sqf
-	Author: ColinM9991
+	Author: _Fuzz
 	
 	Description:
 	Figure it out.
 */
 private["_value","_action"];
-if(FETCH_CONST(life_adminlevel) < 2) exitWith {closeDialog 0; hint localize "STR_ANOTF_ErrorLevel";};
+if(__GETC__(life_adminlevel) < 2) exitWith {closeDialog 0; hint localize "STR_ANOTF_ErrorLevel";};
 _value = parseNumber(ctrlText 9922);
 if(_value < 0) exitWith {};
-if(_value > 99999999) exitWith {hint localize "STR_ANOTF_Fail"};
+if(_value > 999999) exitWith {hint localize "STR_ANOTF_Fail"};
 //if(!([str(_value)] call life_fnc_isnumeric)) exitWith {hint localize "STR_AIM_notnumeric"};
 
 _action = [

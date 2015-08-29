@@ -1,4 +1,4 @@
-class Life_Admin_Compensate {
+﻿class Life_Admin_Compensate {
 	idd = 9920;
 	name= "life_admin_compensate_give";
 	movingEnable = false;
@@ -7,7 +7,7 @@ class Life_Admin_Compensate {
 	
 	class controlsBackground {
 		class Life_RscTitleBackground:Life_RscText {
-			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])", "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])", "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])", "(profilenamespace getvariable ['GUI_BCG_RGB_A',0.7])"};
+			colorBackground[] = {0,0.6,0.298,0.5};
 			idc = -1;
 			x = 0.1;
 			y = 0.2;

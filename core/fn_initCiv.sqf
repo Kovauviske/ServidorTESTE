@@ -23,4 +23,7 @@ if(life_is_arrested) then
 	waitUntil{!isNull (findDisplay 38500)}; //Wait for the spawn selection to be open.
 	waitUntil{isNull (findDisplay 38500)}; //Wait for the spawn selection to be done.
 };
+titleText ["", "BLACK FADED", 9];
+titleText ["Serveur Linox Life v3.5", "BLACK IN", 6];
 player addRating 9999999;
+[player] call life_fnc_updateClothing;
